@@ -1,7 +1,10 @@
 package chessPieces;
 
-public class knight {
+public class Knight extends GamePiece{
 
+	public Knight(String tag) {
+		super(tag);
+	}
 	
 	
 /* subclass of abstract class gamePiece */	
@@ -24,6 +27,5 @@ public class knight {
 	 * knight's color
 	 * 
 	 */
-	
 	
 }

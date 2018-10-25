@@ -1,8 +1,10 @@
 package chessPieces;
 
-public class rook {
+public class Rook extends GamePiece{
 
-	
+	public Rook(String tag) {
+		super(tag);
+	}
 /* subclass of abstract class gamePiece */	
 	
 	/* Rook Piece: the "castle"
@@ -19,9 +21,5 @@ public class rook {
 	 * your rook must stop before reaching that square
 	 * 
 	 */
-	
-	
-	
-	
 	
 }

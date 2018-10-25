@@ -1,6 +1,10 @@
 package chessPieces;
 
-public class bishop {
+public class Bishop extends GamePiece{
+
+	public Bishop(String tag) {
+		super(tag);
+	}
 
 /* subclass of abstract class gamePiece */	
 	
@@ -23,7 +27,5 @@ public class bishop {
 	 * 
 	 * 
 	 */
-	
-	
 	
 }
