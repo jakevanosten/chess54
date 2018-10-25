@@ -1,13 +1,9 @@
 package chessPieces;
 
-public class GamePiece {
-	String tag;
-	
+public class GamePiece extends CellType{
+
 	public GamePiece(String tag) {
-		this.tag = tag;
-	}	
-	
-	public String getTag() {
-		return tag;
+		super(tag);
 	}
+	
 }

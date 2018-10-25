@@ -12,3 +12,6 @@
 /King.class
 /Bishop.class
 /GamePiece.class
+/BlankSpace.class
+/Legend.class
+/CellType.class
