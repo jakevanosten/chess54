@@ -12,6 +12,50 @@ public class Board{
 		cells = new CellType[this.row][this.col];
 	}
 	
+	public static int transRow(String num) {
+		if(num.equals("1")) {
+			return 7;
+		}else if (num.equals("2")) {
+			return 6;
+		}else if (num.equals("3")) {
+			return 5;
+		}else if (num.equals("4")) {
+			return 4;
+		}else if (num.equals("5")) {
+			return 3;
+		}else if (num.equals("6")) {
+			return 2;
+		}else if (num.equals("7")) {
+			return 1;
+		}else if (num.equals("8")) {
+			return 0;
+		}
+		
+		return 0;
+	}
+	
+	public static int transCol(String letter) {
+		if(letter.equals("a")) {
+			return 0;
+		}else if (letter.equals("b")) {
+			return 1;
+		}else if (letter.equals("c")) {
+			return 2;
+		}else if (letter.equals("d")) {
+			return 3;
+		}else if (letter.equals("e")) {
+			return 4;
+		}else if (letter.equals("f")) {
+			return 5;
+		}else if (letter.equals("g")) {
+			return 6;
+		}else if (letter.equals("h")) {
+			return 7 ;
+		}
+		
+		return 0;
+	}
+	
 	public static void setBoard(Board b) {
 		
 		b.cells[0][0] = new Rook("bR");
