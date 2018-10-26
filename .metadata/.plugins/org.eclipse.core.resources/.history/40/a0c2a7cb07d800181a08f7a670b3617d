@@ -1,0 +1,45 @@
+package gameBoard;
+
+import java.util.StringJoiner;
+
+public class board {
+
+	public static void printBoard(){
+		
+		
+		String[][] board = {
+				{"bR ", "bN ", "bB ", "bQ ", "bK ", "bB ", "bN ", "bR ", "8" },
+				{"bp ", "bp ", "bp ", "bp ", "bp ", "bp ", "bp ", "bp ", "7" },
+				{"  ", " ## ", "  ", " ## ", "  ", " ## ","  ", " ## ", "6"},
+				{"## ", "  ", " ## ", "  ", " ## ", "  ", " ## ", "   ", "5"},
+				{"  ", " ## ", "  ", " ## ", "  ", " ## ","  ", " ## ", "4"},
+				{" ## ", "  ", " ## ", "  ", " ## ", "  ", " ## ", "  ", "3"},
+				{"wp ", "wp ", "wp ", "wp ", "wp ", "wp ", "wp ", "wp ", "2"},
+				{"wR ", "wN ", "wB ", "wQ ", "wK ", "wB ", "wN ", "wR ", "1"},
+				{" a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "}
+				};
+	
+		for (int row = 0; row < board.length; row++){
+			
+			for (int col = 0; col < board[row].length; col++){
+					System.out.print(board[row][col] + " ");
+			}
+			System.out.println();
+		}
+	
+	}
+		
+		
+	
+	
+
+
+public static void main(String[] args){
+	
+	printBoard();
+	
+	
+	
+	}
+
+}
