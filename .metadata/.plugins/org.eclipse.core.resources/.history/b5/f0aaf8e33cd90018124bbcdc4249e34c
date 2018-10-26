@@ -217,15 +217,13 @@ public class Board{
 		char destLetter = n.charAt(3);
 		char destNumber = n.charAt(4);
 		
-		/* IF WE WANT TO PARSE BY origin and destination via token array we can 
-		 * (just gonna run into issue separating letter from number so i thought charAt() was easier at the moment)
-		 
-		String delim = "[ ]+";
-		String[] tokens = n.split(delim);
 		
-		for (int i = 0; i < tokens.length; i++)
-		    System.out.println(tokens[i]);
-		*/
+		//String delim = "[ ]+";
+		//String[] tokens = n.split(delim);
+		
+		//for (int i = 0; i < tokens.length; i++)
+		//    System.out.println(tokens[i]);
+		
 		
 		System.out.println("White Move: " + n);
 		System.out.println("original location letter: " + originLetter + " original location number: " + originNumber);
@@ -235,7 +233,6 @@ public class Board{
 		
 		//FIND CORRESPONDING ROW&COL for origin and destination
 		//ISSUE NEEDING TO BE RESOLVED: doesn't equate to the correct result
-		//char numerical value to integer might be the issue in conversion
 		int originRow = transRow(originNumber);
 		int originCol = transCol(originLetter);
 		int destRow = transRow(destNumber);
@@ -248,8 +245,7 @@ public class Board{
 		
 		
 		
-		//This checks if this movement results in a CheckMate to end the game
-		//If isCheckmate() is true, then we close the input stream and end the game
+		
 		boolean check = isCheckmate(b);
 		if(check == true)
 			reader.close();
@@ -276,12 +272,12 @@ public class Board{
 		bo.printBoard(bo);
 		
 	
-		//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
+		
 			bo.getMove(bo);
-		  //bo.updateBoard(bo);
+			//updatedBoard(bo);
 		
 		
-		
+		//Start making moves until isCheckMate or isStaleMate
 
 	}
 
