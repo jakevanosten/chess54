@@ -4,8 +4,8 @@ public class Pawn extends GamePiece{
 
 	public String pawnMove;
 	
-	public Pawn(String tag) {
-		super(tag);
+	public Pawn(String tag, int wob) {
+		super(tag, wob);
 	}	
 	
 	public String getPawnMove(){

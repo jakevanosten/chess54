@@ -1,4 +1,5 @@
 package chessPieces;
+import gameBoard.*;
 
 public class CellType {
 	String tag;

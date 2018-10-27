@@ -23,26 +23,25 @@ public class Board{
 	
 	
 	public int transRow(char num) {
-		if(num == 1) {
+		if(num == '1') {
 			return 7;
-		}else if (num == 2) {
-			System.out.println("ITS ME HOE");
+		}else if (num == '2') {
 			return 6;
-		}else if (num == 3) {
+		}else if (num == '3') {
 			return 5;
-		}else if (num == 4) {
+		}else if (num == '4') {
 			return 4;
-		}else if (num == 5) {
+		}else if (num == '5') {
 			return 3;
-		}else if (num == 6) {
+		}else if (num == '6') {
 			return 2;
-		}else if (num == 7) {
+		}else if (num == '7') {
 			return 1;
-		}else if (num == 8) {
+		}else if (num == '8') {
 			return 0;
 		}
 		
-		return 0;
+		return 69;
 	}
 	
 	public int transCol(char letter) {
@@ -64,29 +63,29 @@ public class Board{
 			return 7 ;
 		}
 		
-		return 0;
+		return 69;
 	}
 	
 	public void setBoard(Board b) {
 		
-		b.cells[0][0] = new Rook("bR");
-		b.cells[0][1] = new Knight("bN");
-		b.cells[0][2] = new Bishop("bB");
-		b.cells[0][3] = new Queen("bQ");
-		b.cells[0][4] = new King("bK");
-		b.cells[0][5] = new Bishop("bB");
-		b.cells[0][6] = new Knight("bN");
-		b.cells[0][7] = new Rook("bR");
+		b.cells[0][0] = new Rook("bR", 1);
+		b.cells[0][1] = new Knight("bN",1);
+		b.cells[0][2] = new Bishop("bB",1);
+		b.cells[0][3] = new Queen("bQ",1);
+		b.cells[0][4] = new King("bK",1);
+		b.cells[0][5] = new Bishop("bB",1);
+		b.cells[0][6] = new Knight("bN",1);
+		b.cells[0][7] = new Rook("bR",1);
 		b.cells[0][8] = new Legend("8"); 
 		
-		b.cells[1][0] =  new Pawn("bp");
-		b.cells[1][1] =  new Pawn("bp");
-		b.cells[1][2] =  new Pawn("bp");
-		b.cells[1][3] =  new Pawn("bp");
-		b.cells[1][4] =  new Pawn("bp");
-		b.cells[1][5] =  new Pawn("bp");
-		b.cells[1][6] =  new Pawn("bp");
-		b.cells[1][7] =  new Pawn("bp");
+		b.cells[1][0] =  new Pawn("bp",1);
+		b.cells[1][1] =  new Pawn("bp",1);
+		b.cells[1][2] =  new Pawn("bp",1);
+		b.cells[1][3] =  new Pawn("bp",1);
+		b.cells[1][4] =  new Pawn("bp",1);
+		b.cells[1][5] =  new Pawn("bp",1);
+		b.cells[1][6] =  new Pawn("bp",1);
+		b.cells[1][7] =  new Pawn("bp",1);
 		b.cells[1][8] =  new Legend("7"); 
 		
 		b.cells[2][0] =  new BlankSpace("  ");
@@ -129,24 +128,24 @@ public class Board{
 		b.cells[5][7] =  new BlankSpace("  ");
 		b.cells[5][8] =  new Legend("3");
 		
-		b.cells[6][0] =  new Pawn("wp");
-		b.cells[6][1] =  new Pawn("wp");
-		b.cells[6][2] =  new Pawn("wp");
-		b.cells[6][3] =  new Pawn("wp");
-		b.cells[6][4] =  new Pawn("wp");
-		b.cells[6][5] =  new Pawn("wp");
-		b.cells[6][6] =  new Pawn("wp");
-		b.cells[6][7] =  new Pawn("wp");
+		b.cells[6][0] =  new Pawn("wp",0);
+		b.cells[6][1] =  new Pawn("wp",0);
+		b.cells[6][2] =  new Pawn("wp",0);
+		b.cells[6][3] =  new Pawn("wp",0);
+		b.cells[6][4] =  new Pawn("wp",0);
+		b.cells[6][5] =  new Pawn("wp",0);
+		b.cells[6][6] =  new Pawn("wp",0);
+		b.cells[6][7] =  new Pawn("wp",0);
 		b.cells[6][8] =  new Legend("2"); 
 		
-		b.cells[7][0] =  new Rook("wR");
-		b.cells[7][1] =  new Knight("wN");
-		b.cells[7][2] =  new Bishop("wB");
-		b.cells[7][3] =  new Queen("wQ");
-		b.cells[7][4] =  new King("wK");
-		b.cells[7][5] =  new Bishop("wB");
-		b.cells[7][6] =  new Knight("wN");
-		b.cells[7][7] =  new Rook("wR");
+		b.cells[7][0] =  new Rook("wR",0);
+		b.cells[7][1] =  new Knight("wN",0);
+		b.cells[7][2] =  new Bishop("wB",0);
+		b.cells[7][3] =  new Queen("wQ",0);
+		b.cells[7][4] =  new King("wK",0);
+		b.cells[7][5] =  new Bishop("wB",0);
+		b.cells[7][6] =  new Knight("wN",0);
+		b.cells[7][7] =  new Rook("wR",0);
 		b.cells[7][8] =  new Legend("1"); 
 		
 		b.cells[8][0] =  new Legend("a");
@@ -161,27 +160,7 @@ public class Board{
 	}
 	
 	public void printBoard(Board b) {
-		/*
-		String[][] board = { { "bR ", "bN ", "bB ", "bQ ", "bK ", "bB ", "bN ", "bR ", "8" },
-				{ "bp ", "bp ", "bp ", "bp ", "bp ", "bp ", "bp ", "bp ", "7" },
-				{ "  ", " ## ", "  ", " ## ", "  ", " ## ", "  ", " ## ", "6" },
-				{ "## ", "  ", " ## ", "  ", " ## ", "  ", " ## ", "   ", "5" },
-				{ "  ", " ## ", "  ", " ## ", "  ", " ## ", "  ", " ## ", "4" },
-				{ " ## ", "  ", " ## ", "  ", " ## ", "  ", " ## ", "  ", "3" },
-				{ "wp ", "wp ", "wp ", "wp ", "wp ", "wp ", "wp ", "wp ", "2" },
-				{ "wR ", "wN ", "wB ", "wQ ", "wK ", "wB ", "wN ", "wR ", "1" },
-				{ " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h " } };
 		
-		
-		
-		for (int row = 0; row < board.length; row++) {
-
-			for (int col = 0; col < board[row].length; col++) {
-				System.out.print(board[row][col] + " ");
-			}
-			System.out.println();
-		}
-		*/
 		String cellTag = "";
 		for (int i=0; i<b.row;i++) {
 			for(int k=0;k<b.col;k++) {
@@ -207,9 +186,14 @@ public class Board{
 		
 		
 		Scanner reader = new Scanner(System.in);
-		System.out.print("White Move: ");
+		System.out.print("White Move: ");	
 		String n = reader.nextLine();
 		
+		while(n.length() != 5 || (n.charAt(0) < 'a') || (n.charAt(0) > 'h') || (n.charAt(3) < 'a') || (n.charAt(3) > 'h') || (n.charAt(1) < '1') || (n.charAt(1) > '8') || (n.charAt(4) < '1') || (n.charAt(4) > '8')) {
+			System.out.println("Incorrect move format. Example: \"e5 e7\"");
+			System.out.print("White Move: ");
+			n = reader.nextLine();
+		}
 		
 		char originLetter = n.charAt(0);
 		char originNumber = n.charAt(1);
@@ -241,7 +225,7 @@ public class Board{
 		int destRow = transRow(destNumber);
 		int destCol = transCol(destLetter);
 		
-		System.out.println("Origin Location: " + originLetter + originNumber + " Actual RXC coordinates: " + originRow + originCol);
+		System.out.println("Origin Location: " + originLetter + originNumber + " Actual RxC coordinates: " + originRow + originCol);
 		System.out.println("Destination: " + destLetter + destNumber + " Actual RxC coordinates: " + destRow + destCol);
 		
 		

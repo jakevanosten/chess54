@@ -4,8 +4,8 @@ public class King extends GamePiece{
 
 	public String kingMove;
 	
-	public King(String tag) {
-		super(tag);
+	public King(String tag, int wob) {
+		super(tag, wob);
 	}
 	
 	public String getKingMove(){

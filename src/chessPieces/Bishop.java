@@ -4,8 +4,8 @@ public class Bishop extends GamePiece{
 
 	public String bishopMove;
 	
-	public Bishop(String tag) {
-		super(tag);
+	public Bishop(String tag, int wob) {
+		super(tag, wob);
 	}
 	
 	

@@ -2,8 +2,8 @@ package chessPieces;
 
 public class Knight extends GamePiece{
 
-	public Knight(String tag) {
-		super(tag);
+	public Knight(String tag, int wob) {
+		super(tag, wob);
 	}
 	
 	

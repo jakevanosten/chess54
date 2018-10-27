@@ -4,8 +4,8 @@ public class Rook extends GamePiece{
 
 	public String rookMove;
 	
-	public Rook(String tag) {
-		super(tag);
+	public Rook(String tag, int wob) {
+		super(tag, wob);
 	}
 	
 	public String getRookMove(){

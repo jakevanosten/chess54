@@ -4,8 +4,8 @@ public class Queen extends GamePiece{
 
 	public String queenMove;
 	
-	public Queen(String tag) {
-		super(tag);
+	public Queen(String tag, int wob) {
+		super(tag, wob);
 	}
 	
 	public String getQueenMove(){
