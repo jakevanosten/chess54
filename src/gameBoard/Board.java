@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Board{
 	int row, col = 0;
-	private CellType[][] cells;
+	public static CellType[][] cells;
 	
 	
 	
@@ -22,7 +22,7 @@ public class Board{
 	
 	
 	
-	public int transRow(char num) {
+	public static int transRow(char num) {
 		if(num == '1') {
 			return 7;
 		}else if (num == '2') {
@@ -44,7 +44,7 @@ public class Board{
 		return 69;
 	}
 	
-	public int transCol(char letter) {
+	public static int transCol(char letter) {
 		if(letter == 'a') {
 			return 0;
 		}else if (letter == 'b') {
@@ -189,7 +189,7 @@ public class Board{
 		System.out.print("White Move: ");	
 		String n = reader.nextLine();
 		
-		while(n.length() != 5 || (n.charAt(0) < 'a') || (n.charAt(0) > 'h') || (n.charAt(3) < 'a') || (n.charAt(3) > 'h') || (n.charAt(1) < '1') || (n.charAt(1) > '8') || (n.charAt(4) < '1') || (n.charAt(4) > '8')) {
+		while(n.length() != 5 || (n.charAt(0) == n.charAt(3) && n.charAt(1) == n.charAt(4)) || (n.charAt(0) < 'a') || (n.charAt(0) > 'h') || (n.charAt(3) < 'a') || (n.charAt(3) > 'h') || (n.charAt(1) < '1') || (n.charAt(1) > '8') || (n.charAt(4) < '1') || (n.charAt(4) > '8')) {
 			System.out.println("Incorrect move format. Example: \"e5 e7\"");
 			System.out.print("White Move: ");
 			n = reader.nextLine();

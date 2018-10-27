@@ -6,7 +6,7 @@ public class CellType {
 	
 	public CellType(String tag) {
 		this.tag = tag;
-	}	
+	}
 	
 	public String getTag() {
 		return tag;
