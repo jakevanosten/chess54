@@ -190,7 +190,7 @@ public class Board{
 		String n = reader.nextLine();
 		
 		while(n.length() != 5 || (n.charAt(0) == n.charAt(3) && n.charAt(1) == n.charAt(4)) || (n.charAt(0) < 'a') || (n.charAt(0) > 'h') || (n.charAt(3) < 'a') || (n.charAt(3) > 'h') || (n.charAt(1) < '1') || (n.charAt(1) > '8') || (n.charAt(4) < '1') || (n.charAt(4) > '8')) {
-			System.out.println("Incorrect move format. Example: \"e5 e7\"");
+			System.out.println("Illegal move, try again");
 			System.out.print("White Move: ");
 			n = reader.nextLine();
 		}

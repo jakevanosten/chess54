@@ -16,6 +16,11 @@ public class Queen extends GamePiece{
 		queenMove = tag;
 	}
 	
+	public boolean tryMove(String curr, String next) {
+		if(isValidLoc(curr,next) && isPathClear(curr,next) && (isUp(curr,next) || isDown(curr,next) || isHoriz(curr,next) || isDiag(curr,next))) {return true;}
+		
+		return false;
+	}
 	/*make method for Try to Move to see if its a legal move*/
 	/*This will be the method that error checks for queen specific moves*/
 	/*Also will be able to indicate if a move will result in a simple change in location or a kill */

@@ -6,7 +6,11 @@ public class Knight extends GamePiece{
 		super(tag, wob);
 	}
 	
-	
+	public boolean tryMove(String curr, String next) {
+		if(isValidLoc(curr,next) && isPathClear(curr,next) && isL(curr,next)) {return true;}
+		
+		return false;
+	}
 /* subclass of abstract class gamePiece */	
 	
 	/* Knight Piece: the "horse"
@@ -29,3 +33,4 @@ public class Knight extends GamePiece{
 	 */
 	
 }
+
