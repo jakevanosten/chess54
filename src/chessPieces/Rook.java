@@ -1,19 +1,9 @@
 package chessPieces;
 
 public class Rook extends GamePiece{
-
-	public String rookMove;
 	
 	public Rook(String tag, int wob) {
 		super(tag, wob);
-	}
-	
-	public String getRookMove(){
-		return rookMove;
-	}
-	
-	public void setPawnMove(String tag){
-		rookMove = tag;
 	}
 	
 	public boolean tryMove(String curr, String next) {

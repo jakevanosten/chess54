@@ -244,7 +244,6 @@ public class Board{
 		//TRY TO COMPARE OBJECT TYPE AND SEE IF VALID MOVE
 		//GONNA PROBABLY SEPARATE INTO A NEW METHOD
 		
-		boolean isOppInSpace;
 		CellType currCell = b.cells[originRow][originCol];
 		
 		if (currCell instanceof BlankSpace)
@@ -255,9 +254,8 @@ public class Board{
 		if(currCell instanceof Pawn){
 			
 			isValidMove = ((Pawn) currCell).tryMove(tokens[0],tokens[1]);
-			isOppInSpace = ((Pawn) currCell).oppInSpace(tokens[0], tokens[1]);
 			
-			if(isValidMove == true && isOppInSpace == false){
+			if(isValidMove){
 				System.out.println("yerr its valid");
 				updateBoard(b, tokens[0], tokens[1], "Pawn", pID);
 			}
@@ -299,9 +297,9 @@ public class Board{
 	
 	public void updateBoard(Board b, String curr, String next, String pieceType, char pID){
 		
-		int originRow = transRow(curr.charAt(0));
-		int originCol = transRow(curr.charAt(1));
-		int destRow = transRow(next.charAt(0));
+		int originRow = transRow(curr.charAt(1));
+		int originCol = transCol(curr.charAt(0));
+		int destRow = transRow(next.charAt(1));
 		int destCol = transCol(next.charAt(0));
 		//clear old cell
 		if((destRow == 2 || destRow == 4) && (destCol % 2 != 0))
@@ -344,8 +342,8 @@ public class Board{
 		boolean whiteMoved = false;
 		boolean blackMoved = false;
 		
-		player white = new player('w');
-		player black = new player('b');
+		Player white = new Player('w');
+		Player black = new Player('b');
 		//System.out.println("White ID is: " + white.getPlayerID());
 		
 		char wPID = white.getPlayerID();
@@ -356,7 +354,7 @@ public class Board{
 		
 	
 		//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
-		
+	
 		while(check == false){
 			if(whiteMoved == false){
 				bo.printBoard(bo);
@@ -365,7 +363,7 @@ public class Board{
 				bo.getMove(bo, input, wPID);
 				whiteMoved = true;
 				blackMoved = false;
-				continue;
+				
 			}
 			else if(blackMoved == false){
 				bo.printBoard(bo);
@@ -373,11 +371,10 @@ public class Board{
 				bo.getMove(bo, input, bPID);
 				blackMoved = true;
 				whiteMoved = false;
-				continue;
-			}	
 			
-		}
+			}	
 		
+		}
 		
 
 	}

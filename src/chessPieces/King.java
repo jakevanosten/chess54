@@ -8,14 +8,6 @@ public class King extends GamePiece{
 		super(tag, wob);
 	}
 	
-	public String getKingMove(){
-		return kingMove;
-	}
-	
-	public void setKingMove(String tag){
-		kingMove = tag;
-	}
-	
 	public boolean tryMove(String curr, String next) {
 		if(isValidLoc(curr,next) && isPathClear(curr,next) && isOneSpace(curr,next) && (isUp(curr,next) || isDown(curr,next) || isHoriz(curr,next) || isDiag(curr,next))) {
 			return true;

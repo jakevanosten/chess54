@@ -2,6 +2,22 @@ package chessPieces;
 
 import gameBoard.Board;
 
+/*
+ * DIFFERENT RULES
+ * 	DONE - 1. IsValidLoc - If space that youre trying to move to is blocked by your team (if opponent is there you capture them)
+ *  DONE - 2. IsPathClear - checks if all spaces in path to destination are not blocked by other pieces (does not apply to knights)
+ *  
+ *  DONE 3. IsUp - checks if move is in a straight forward direction (for Pawns, Rooks, Queens, Kings)
+ *  DONE 4. IsDown - checks if move is in a backwards direction (for Rooks, Queens, Kings)
+ *  DONE 5. IsHoriz - checks if move is to the left or right of current position (for Rooks, Queens, Kings)
+ *  DONE 6. IsDiag - checks if move is diagonal from current position (for Bishops, Queens, Kings/pawns when capturing - needs to be opponent there)
+ *  DONE 7. IsL - checks if in L from current position (for Knights)
+ *  
+ *  DONE - in Pawn.java 8. IsFirstMove - checks if they are in the beginning row which would make the two space jump possible (for Pawns)
+ *  
+ *  9. IsOneSpace - move length restriction for pawns and kings
+ */
+
 public class GamePiece extends CellType{
 	int whiteOrBlack;
 	
@@ -14,29 +30,14 @@ public class GamePiece extends CellType{
 		return whiteOrBlack;
 	}
 	
-public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
-	
-	/*
-	 * DIFFERENT RULES
-	 * 	DONE - 1. IsValidLoc - If space that youre trying to move to is blocked by your team (if opponent is there you capture them)
-	 *  DONE - 2. IsPathClear - checks if all spaces in path to destination are not blocked by other pieces (does not apply to knights)
-	 *  
-	 *  DONE 3. IsUp - checks if move is in a straight forward direction (for Pawns, Rooks, Queens, Kings)
-	 *  DONE 4. IsDown - checks if move is in a backwards direction (for Rooks, Queens, Kings)
-	 *  DONE 5. IsHoriz - checks if move is to the left or right of current position (for Rooks, Queens, Kings)
-	 *  DONE 6. IsDiag - checks if move is diagonal from current position (for Bishops, Queens, Kings/pawns when capturing - needs to be opponent there)
-	 *  DONE 7. IsL - checks if in L from current position (for Knights)
-	 *  
-	 *  DONE - in Pawn.java 8. IsFirstMove - checks if they are in the beginning row which would make the two space jump possible (for Pawns)
-	 *  
-	 *  9. IsOneSpace - move length restriction for pawns and kings
-	 */
+	public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
+
 	
 	public boolean isOneSpace(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		if (nextCol-currCol==1 && nextRow-currRow==1) { //bottom right
 			return true;
@@ -79,9 +80,9 @@ public boolean tryMove(String curr, String next) {return false;}; //going to be 
 	
 	public boolean isPathClear(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		/*DONE -if only row changes, move along the columns. 
 		 *DONE - if only col changes, move along the row.
@@ -161,9 +162,9 @@ public boolean tryMove(String curr, String next) {return false;}; //going to be 
 	
 	public boolean isUp(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		if (currCol == nextCol && currRow != nextRow && currRow > nextRow) { //moving up
 			return true;
@@ -173,9 +174,9 @@ public boolean tryMove(String curr, String next) {return false;}; //going to be 
 	
 	public boolean isDown(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		if (currCol == nextCol && currRow != nextRow && currRow < nextRow){ //moving up
 			return true;
@@ -185,9 +186,9 @@ public boolean tryMove(String curr, String next) {return false;}; //going to be 
 	
 	public boolean isHoriz(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		if (currCol != nextCol && currRow == nextRow) {
 			return true;
@@ -197,9 +198,9 @@ public boolean tryMove(String curr, String next) {return false;}; //going to be 
 	
 	public boolean isDiag(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		if (nextCol-currCol==nextRow-currRow){
 			return true;
@@ -209,9 +210,9 @@ public boolean tryMove(String curr, String next) {return false;}; //going to be 
 	
 	public boolean isL(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
+		int currCol = Board.transCol(curr.charAt(0));
 		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+		int nextCol = Board.transCol(next.charAt(0));
 		
 		if ((nextCol-currCol==2 || currCol-nextCol==2) && (nextRow-currRow==1 || currRow-nextRow==1)) { //left or right 2 and up or down 1
 			return true;

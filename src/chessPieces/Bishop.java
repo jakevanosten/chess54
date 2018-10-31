@@ -2,19 +2,8 @@ package chessPieces;
 
 public class Bishop extends GamePiece{
 
-	public String bishopMove;
-	
 	public Bishop(String tag, int wob) {
 		super(tag, wob);
-	}
-	
-	
-	public String getBishopMove(){
-		return bishopMove;
-	}
-	
-	public void setPawnMove(String tag){
-		bishopMove = tag;
 	}
 	
 	public boolean tryMove(String curr, String next) {

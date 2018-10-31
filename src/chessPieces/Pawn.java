@@ -4,21 +4,9 @@ import gameBoard.Board;
 
 public class Pawn extends GamePiece{
 
-	public String pawnMove;
-	
 	public Pawn(String tag, int wob) {
 		super(tag, wob);
 	}	
-	
-	/*
-	public String getPawnMove(){
-		return pawnMove;
-	}
-	
-	public void setPawnMove(String tag) {
-		pawnMove = tag;
-	}
-	*/
 	
 	public boolean isFirstMove(String curr) {
 		

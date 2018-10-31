@@ -2,18 +2,8 @@ package chessPieces;
 
 public class Queen extends GamePiece{
 
-	public String queenMove;
-	
 	public Queen(String tag, int wob) {
 		super(tag, wob);
-	}
-	
-	public String getQueenMove(){
-		return queenMove;
-	}
-	
-	public void setqueenMove(String tag){
-		queenMove = tag;
 	}
 	
 	public boolean tryMove(String curr, String next) {

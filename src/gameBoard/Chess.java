@@ -2,9 +2,8 @@ package gameBoard;
 import chessPieces. *;
 import gameBoard. *;
 
-public class chess {
+public class Chess {
 
-	
 	
 	public static void main(String[] args){
 		

@@ -2,13 +2,13 @@ package gameBoard;
 
 import java.util.Scanner;
 
-public class player {
+public class Player {
 
 	private char playerID;
 
 	
 	
-	public player(char playerID){
+	public Player(char playerID){
 		this.playerID = playerID;
 	}
 	
