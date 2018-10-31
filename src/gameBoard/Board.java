@@ -340,29 +340,95 @@ public class Board{
 		//clear old cell
 		System.out.println("\n");
 		
-		if((destRow == 2 || destRow == 4) && (destCol % 2 != 0))
+		if((originRow == 2 || originRow == 4) && (originCol % 2 != 0))
 			b.cells[originRow][originCol] = new BlankSpace("##");
 		
-		else if((destRow == 2 || destRow == 4) && (destCol % 2 == 0))
+		else if((originRow == 2 || originRow == 4) && (originCol % 2 == 0))
 			b.cells[originRow][originCol] = new BlankSpace("  ");
 		
-		else if((destRow == 3 || destRow == 5) && (destCol % 2 == 0))
+		else if((originRow == 3 || originRow == 5) && (originCol % 2 == 0))
 			b.cells[originRow][originCol] = new BlankSpace("##");
 		
-		else if((destRow == 3 || destRow == 5) && (destCol % 2 != 0))
+		else if((originRow == 3 || originRow == 5) && (originCol % 2 != 0))
 			b.cells[originRow][originCol] = new BlankSpace("  ");
+		
+		else if((originRow == 0 || originRow == 6) && (originCol % 2 == 0))
+			b.cells[originRow][originCol] = new BlankSpace("  ");
+		
+		else if((originRow == 0 || originRow == 6) && (originCol % 2 != 0))
+			b.cells[originRow][originCol] = new BlankSpace("##");
+		
+		else if((originRow == 1 || originRow == 7) && (originCol % 2 != 0))
+			b.cells[originRow][originCol] = new BlankSpace("  ");
+		
+		else if((originRow == 1 || originRow == 7) && (originCol % 2 == 0))
+			b.cells[originRow][originCol] = new BlankSpace("##");
+		
 		
 		
 			
 		//Update new cell 
+		
+		//Pawn Piece Update
 		if(pieceType.equals("Pawn") && pID == 'w'){
 			b.cells[destRow][destCol] = null;
 			b.cells[destRow][destCol] = new Pawn("wp", 0);
 		}
-		if(pieceType.equals("Pawn") && pID == 'b'){
+		else if(pieceType.equals("Pawn") && pID == 'b'){
 			b.cells[destRow][destCol] = null;
 			b.cells[destRow][destCol] = new Pawn("bp", 1);
 		}
+		
+		//Bishop Piece Update
+		if(pieceType.equals("Bishop") && pID == 'w'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Bishop("wB", 0);
+		}
+		else if(pieceType.equals("Bishop") && pID == 'b'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Bishop("bB", 1);
+		}
+		
+		//Knight Piece Update
+		if(pieceType.equals("Knight") && pID == 'w'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Knight("wN", 0);
+		}
+		else if(pieceType.equals("Knight") && pID == 'b'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Knight("bN", 1);
+		}
+		
+		//Rook Piece Update
+		if(pieceType.equals("Rook") && pID == 'w'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Rook("wR", 0);
+		}
+		else if(pieceType.equals("Rook") && pID == 'b'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Rook("bR", 1);
+		}
+		
+		//Queen Piece Update
+		if(pieceType.equals("Queen") && pID == 'w'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Queen("wQ", 0);
+		}
+		else if(pieceType.equals("Queen") && pID == 'b'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new Queen("bQ", 1);
+		}
+		
+		//King Piece Update
+		if(pieceType.equals("King") && pID == 'w'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new King("wQ", 0);
+		}
+		else if(pieceType.equals("King") && pID == 'b'){
+			b.cells[destRow][destCol] = null;
+			b.cells[destRow][destCol] = new King("bQ", 1);
+		}
+		
 		
 		
 		
