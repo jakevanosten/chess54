@@ -19,7 +19,7 @@ import gameBoard.Board;
  */
 
 public class GamePiece extends CellType{
-	int whiteOrBlack;
+	public int whiteOrBlack;
 	
 	public GamePiece(String tag, int whiteOrBlack) {
 		super(tag);

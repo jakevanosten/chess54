@@ -229,8 +229,8 @@ public class Board{
 		int destRow = transRow(destNumber);
 		int destCol = transCol(destLetter);
 		
-		System.out.println("Origin Location: " + originLetter + originNumber + " Actual RxC coordinates: " + originRow + originCol);
-		System.out.println("Destination: " + destLetter + destNumber + " Actual RxC coordinates: " + destRow + destCol);
+		//System.out.println("Origin Location: " + originLetter + originNumber + " Actual RxC coordinates: " + originRow + originCol);
+		//System.out.println("Destination: " + destLetter + destNumber + " Actual RxC coordinates: " + destRow + destCol);
 		
 		boolean isValidMove;
 		/*
@@ -253,31 +253,67 @@ public class Board{
 		
 		if(currCell instanceof Pawn){
 			
-			isValidMove = ((Pawn) currCell).tryMove(tokens[0],tokens[1]);
+			isValidMove = (((Pawn) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
-				System.out.println("yerr its valid");
 				updateBoard(b, tokens[0], tokens[1], "Pawn", pID);
 			}
 			else
 				System.out.println("fail");
 			
-		}
-		
+		} else if(currCell instanceof Bishop){
 			
+			isValidMove = (((Bishop) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
-		
-		
-		//isValidMove = isPathClear(tokens[0], tokens[1]);
-		
-		
-		
+			if(isValidMove){
+				updateBoard(b, tokens[0], tokens[1], "Bishop", pID);
+			}
+			else
+				System.out.println("fail");
+			
+		} else if(currCell instanceof King){
+			
+			isValidMove = (((King) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			
+			if(isValidMove){
+				updateBoard(b, tokens[0], tokens[1], "King", pID);
+			}
+			else
+				System.out.println("fail");
+			
+		}else if(currCell instanceof Queen){
+			
+			isValidMove = (((Queen) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			
+			if(isValidMove){
+				updateBoard(b, tokens[0], tokens[1], "Queen", pID);
+			}
+			else
+				System.out.println("fail");
+			
+		}else if(currCell instanceof Knight){
+			
+			isValidMove = (((Knight) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			
+			if(isValidMove){
+				updateBoard(b, tokens[0], tokens[1], "Knight", pID);
+			}
+			else
+				System.out.println("fail");
+			
+		}else if(currCell instanceof Rook){
+			
+			isValidMove = (((Rook) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			
+			if(isValidMove){
+				updateBoard(b, tokens[0], tokens[1], "Rook", pID);
+			}
+			else
+				System.out.println("fail");
+			
+		}	
 		//This checks if this movement results in a CheckMate to end the game
 		//If isCheckmate() is true, then we close the input stream and end the game
-		
-		
-		
-		
 	}
 	
 	
@@ -294,7 +330,7 @@ public class Board{
 	}
 	
 	
-	
+	//ROWS REFER TO LETTERS
 	public void updateBoard(Board b, String curr, String next, String pieceType, char pID){
 		
 		int originRow = transRow(curr.charAt(1));
@@ -302,6 +338,8 @@ public class Board{
 		int destRow = transRow(next.charAt(1));
 		int destCol = transCol(next.charAt(0));
 		//clear old cell
+		System.out.println("\n");
+		
 		if((destRow == 2 || destRow == 4) && (destCol % 2 != 0))
 			b.cells[originRow][originCol] = new BlankSpace("##");
 		
@@ -359,7 +397,8 @@ public class Board{
 			if(whiteMoved == false){
 				bo.printBoard(bo);
 				input = white.makeMove(wPID, check);
-				System.out.println("input string is: " + input);
+				
+				
 				bo.getMove(bo, input, wPID);
 				whiteMoved = true;
 				blackMoved = false;
@@ -368,6 +407,7 @@ public class Board{
 			else if(blackMoved == false){
 				bo.printBoard(bo);
 				input = black.makeMove(bPID, check);
+				
 				bo.getMove(bo, input, bPID);
 				blackMoved = true;
 				whiteMoved = false;
