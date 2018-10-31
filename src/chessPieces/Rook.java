@@ -2,8 +2,8 @@ package chessPieces;
 
 public class Rook extends GamePiece{
 	
-	public Rook(String tag, int wob) {
-		super(tag, wob);
+	public Rook(String tag, int wob, int r, int c) {
+		super(tag, wob, r, c);
 	}
 	
 	public boolean tryMove(String curr, String next) {

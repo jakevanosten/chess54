@@ -1,6 +1,7 @@
 package chessPieces;
 
 import gameBoard.Board;
+import gameBoard.Player;
 
 /*
  * DIFFERENT RULES
@@ -20,14 +21,25 @@ import gameBoard.Board;
 
 public class GamePiece extends CellType{
 	public int whiteOrBlack;
+	public int rowPos, colPos = 0;
 	
-	public GamePiece(String tag, int whiteOrBlack) {
+	public GamePiece(String tag, int whiteOrBlack, int rowPos, int colPos) {
 		super(tag);
+		this.rowPos = rowPos;
+		this.colPos = colPos;
 		this.whiteOrBlack = whiteOrBlack;
 	}
 	
 	public int getColor() {
 		return whiteOrBlack;
+	}
+	
+	public int getRow() {
+		return rowPos;
+	}
+	
+	public int getCol() {
+		return colPos;
 	}
 	
 	public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
@@ -60,6 +72,24 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
+/*	
+	public int[][] getLegalPositions() {
+		int[][] coords;
+		int currRow = Board.transRow(curr.charAt(1));
+		int currCol = Board.transCol(curr.charAt(0));
+		int nextRow = Board.transRow(next.charAt(1));
+		int nextCol = Board.transCol(next.charAt(0));
+		for(int i = 0; i<8;i++) {
+			for(int k = 0; k<8;k++) {
+				
+			}
+		}
+		
+		return null;
+	}
+	*/
+	
+	
 	public boolean isValidLoc(String curr, String next) {
 		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
 		CellType nxtCell = Board.cells[Board.transRow(next.charAt(1))][Board.transCol(next.charAt(0))];
@@ -76,6 +106,48 @@ public class GamePiece extends CellType{
 			}
 		}
 		return true;
+	}
+	
+	public boolean inCheck(int kingRow, int kingCol, Player p) {
+		//locate king of players color on board - do reverse pathClear for every pieces path type, if piece from other team found on path then check
+		int theirColor;
+		if(p.getPlayerID() == 'w') { theirColor=1;}
+		else { theirColor=0;}
+		
+		String king = Board.convRow(kingRow).concat(Board.convCol(kingCol));
+		GamePiece curr;
+		String currLoc;
+		for(int i =0;i<8;i++) {
+			for(int k=0;k<8;k++) {
+				if (Board.cells[i][k] instanceof GamePiece) {
+					if(((GamePiece) Board.cells[i][k]).whiteOrBlack == theirColor) { //opponents piece
+						curr = (GamePiece) Board.cells[i][k];
+						currLoc = Board.convRow(i).concat(Board.convCol(kingCol));
+						if(curr instanceof Bishop){
+							Bishop currB = (Bishop) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Knight){
+							Knight currB = (Knight) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Pawn){
+							Pawn currB = (Pawn) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Queen){
+							Queen currB = (Queen) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Rook){
+							Rook currB = (Rook) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	public boolean isPathClear(String curr, String next) {
@@ -109,18 +181,18 @@ public class GamePiece extends CellType{
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol < nextCol) { //moving right
 			for(int i=currCol+1;i<=nextCol;i++) {
-				if(i==nextRow && Board.cells[i][currRow] instanceof GamePiece && ((GamePiece) Board.cells[i][currRow]).whiteOrBlack != this.whiteOrBlack) { 
+				if(i==nextCol && Board.cells[currRow][i] instanceof GamePiece && ((GamePiece) Board.cells[currRow][i]).whiteOrBlack != this.whiteOrBlack) { 
 					return true;
-				}else if(Board.cells[i][currRow] instanceof GamePiece) { //piece in the way
+				}else if(Board.cells[currRow][i] instanceof GamePiece) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol > nextCol) { //moving left
 			for(int i=currCol-1;i>=nextCol;i--) {
-				if(i==nextRow && Board.cells[i][currRow] instanceof GamePiece && ((GamePiece) Board.cells[i][currRow]).whiteOrBlack != this.whiteOrBlack) { 
+				if(i==nextCol && Board.cells[currRow][i] instanceof GamePiece && ((GamePiece) Board.cells[currRow][i]).whiteOrBlack != this.whiteOrBlack) { 
 					return true;
-				}else if(Board.cells[i][currRow] instanceof GamePiece) { //piece in the way
+				}else if(Board.cells[currRow][i] instanceof GamePiece) { //piece in the way
 					return false;
 				}
 			}
@@ -206,7 +278,7 @@ public class GamePiece extends CellType{
 		int nextRow = Board.transRow(next.charAt(1));
 		int nextCol = Board.transCol(next.charAt(0));
 		
-		if (currCol != nextCol && currRow == nextRow) {
+		if ((currCol != nextCol) && (currRow == nextRow)) {
 			return true;
 		}
 		return false;
@@ -236,6 +308,7 @@ public class GamePiece extends CellType{
 			return true;
 		}
 		return false;
-	} 
+	}
+
 	
 }

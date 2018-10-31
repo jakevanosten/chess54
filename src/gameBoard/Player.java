@@ -17,11 +17,11 @@ public class Player {
 	}
 	
 	public String makeMove(char pID, boolean isCheckmate){
-		
+		System.out.println();
 		Scanner reader = new Scanner(System.in);
 		String input;
 		if(pID == 'w'){
-			System.out.print("White Move: ");	
+			System.out.print("White's Move: ");	
 			input = reader.nextLine();
 			
 			
@@ -42,12 +42,12 @@ public class Player {
 				
 				
 				System.out.println("Illegal move, try again");
-				System.out.print("White Move: ");
+				System.out.print("White's Move: ");
 				input = reader.nextLine();
 			}
 			
 		}else{
-			System.out.print("Black Move: ");
+			System.out.print("Black's Move: ");
 			input = reader.nextLine();
 			
 			
@@ -68,7 +68,7 @@ public class Player {
 				
 				
 				System.out.println("Illegal move, try again");
-				System.out.print("Black Move: ");
+				System.out.print("Black's Move: ");
 				input = reader.nextLine();
 			}
 			

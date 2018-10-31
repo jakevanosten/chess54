@@ -2,8 +2,8 @@ package chessPieces;
 
 public class Bishop extends GamePiece{
 
-	public Bishop(String tag, int wob) {
-		super(tag, wob);
+	public Bishop(String tag, int wob, int r, int c) {
+		super(tag, wob, r, c);
 	}
 	
 	public boolean tryMove(String curr, String next) {

@@ -3,9 +3,10 @@ package chessPieces;
 import gameBoard.Board;
 
 public class Pawn extends GamePiece{
-
-	public Pawn(String tag, int wob) {
-		super(tag, wob);
+	public static int promotionFlag = 0;
+	
+	public Pawn(String tag, int wob, int r, int c) {
+		super(tag, wob, r, c);
 	}	
 	
 	
@@ -17,6 +18,19 @@ public class Pawn extends GamePiece{
 		return false;
 	}
 	
+	public boolean isPromoting(String curr, String next) {
+		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
+		
+		GamePiece currPiece = (GamePiece) curCell;
+		int currColor = currPiece.whiteOrBlack;
+		
+		if(currColor == 0 && next.charAt(1) == '8') { //white pawn reaching top row of board
+			return true;
+		}else if(currColor == 1 && next.charAt(1) == '1') { //black pawn reaching bottom row of board
+			return true;
+		}
+		return false;
+	}
 	
 	public boolean oppInSpace(String curr, String next) {
 		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
@@ -39,6 +53,11 @@ public class Pawn extends GamePiece{
 	public boolean tryMove(String curr, String next) { //This is complicated, need to do diagonal if trying to capture, otherwise get length to be 1 or 2
 		boolean val = isValidLoc(curr,next);
 		boolean path = isPathClear(curr,next);
+		promotionFlag = 0;
+		
+		if(isPromoting(curr,next)) { 
+			promotionFlag = 1;
+		}
 		
 		if(isFirstMove(curr) && val && path && ((isUp(curr,next) && this.whiteOrBlack == 0) || (isDown(curr,next) && this.whiteOrBlack == 1))) {//can move two spaces
 			int currRow = Board.transRow(curr.charAt(1));
