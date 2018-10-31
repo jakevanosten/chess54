@@ -51,7 +51,7 @@ public class GamePiece extends CellType{
 			return true;
 		}else if (currCol-nextCol==1 && currRow==nextRow) { //directly left
 			return true;
-		}if (nextCol-currCol==1 && nextRow-currRow==1) { //bottom left
+		}if (currCol-nextCol==1 && nextRow-currRow==1) { //bottom left
 			return true;
 		}else if (nextCol==currCol && nextRow-currRow==1) { //directly down
 			return true;
@@ -91,38 +91,48 @@ public class GamePiece extends CellType{
 		 */
 		if(currCol == nextCol && currRow != nextRow && currRow < nextRow) { //check each row on path - moving down the board
 			for(int i=currRow+1;i<=nextRow;i++) {
-				if(Board.cells[i][currCol] instanceof GamePiece) { //piece in the way
+				if(i==nextRow && Board.cells[i][currCol] instanceof GamePiece && ((GamePiece) Board.cells[i][currCol]).whiteOrBlack != this.whiteOrBlack) { 
+					return true;
+				}else if(Board.cells[i][currCol] instanceof GamePiece) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol == nextCol && currRow != nextRow && currRow > nextRow) { //moving up
 			for(int i=currRow-1;i>=nextRow;i--) {
-				if(Board.cells[i][currCol] instanceof GamePiece) { //piece in the way
+				if(i==nextRow && Board.cells[i][currCol] instanceof GamePiece && ((GamePiece) Board.cells[i][currCol]).whiteOrBlack != this.whiteOrBlack) { 
+					return true;
+				}else if(Board.cells[i][currCol] instanceof GamePiece) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol < nextCol) { //moving right
 			for(int i=currCol+1;i<=nextCol;i++) {
-				if(Board.cells[currRow][i] instanceof GamePiece) { //piece in the way
+				if(i==nextRow && Board.cells[i][currRow] instanceof GamePiece && ((GamePiece) Board.cells[i][currRow]).whiteOrBlack != this.whiteOrBlack) { 
+					return true;
+				}else if(Board.cells[i][currRow] instanceof GamePiece) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol > nextCol) { //moving left
 			for(int i=currCol-1;i>=nextCol;i--) {
-				if(Board.cells[currRow][i] instanceof GamePiece) { //piece in the way
+				if(i==nextRow && Board.cells[i][currRow] instanceof GamePiece && ((GamePiece) Board.cells[i][currRow]).whiteOrBlack != this.whiteOrBlack) { 
+					return true;
+				}else if(Board.cells[i][currRow] instanceof GamePiece) { //piece in the way
 					return false;
 				}
 			}
 			return true;
-		}else if (nextCol-currCol==nextRow-currRow) { //moving diagonally
+		}else if (nextCol-currCol==nextRow-currRow || nextCol-currCol==currRow-nextRow) { //moving diagonally
 			int k = currRow;
 			if(nextCol>currCol && nextRow>currRow) {//down and right
 				k = currRow+1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(i==nextCol && Board.cells[k][i] instanceof GamePiece && ((GamePiece) Board.cells[k][i]).whiteOrBlack != this.whiteOrBlack) { 
+						return true;
+					}else if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
 						return false;
 					}
 					k++;
@@ -131,7 +141,9 @@ public class GamePiece extends CellType{
 			}else if(nextCol>currCol && nextRow<currRow) {//up and right
 				k = currRow-1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(i==nextCol && Board.cells[k][i] instanceof GamePiece && ((GamePiece) Board.cells[k][i]).whiteOrBlack != this.whiteOrBlack) { 
+						return true;
+					}else if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
 						return false;
 					}
 					k--;
@@ -140,7 +152,9 @@ public class GamePiece extends CellType{
 			}else if(nextCol<currCol && nextRow>currRow) {//down and left
 				k = currRow+1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(i==nextCol && Board.cells[k][i] instanceof GamePiece && ((GamePiece) Board.cells[k][i]).whiteOrBlack != this.whiteOrBlack) { 
+						return true;
+					}else if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
 						return false;
 					}
 					k++;
@@ -149,7 +163,9 @@ public class GamePiece extends CellType{
 			}else { //up and left
 				k = currRow-1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(i==nextCol && Board.cells[k][i] instanceof GamePiece && ((GamePiece) Board.cells[k][i]).whiteOrBlack != this.whiteOrBlack) { 
+						return true;
+					}else if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
 						return false;
 					}
 					k--;

@@ -27,7 +27,7 @@ public class Pawn extends GamePiece{
 		
 		if(nxtCell instanceof GamePiece) {
 			GamePiece gameCell = (GamePiece) nxtCell;
-			if (gameCell.whiteOrBlack == currColor) { //same color in next, can't move
+			if (gameCell.whiteOrBlack != currColor) { //same color in next, can't move
 				return true;
 			}
 			return false;
@@ -37,10 +37,14 @@ public class Pawn extends GamePiece{
 	
 	
 	public boolean tryMove(String curr, String next) { //This is complicated, need to do diagonal if trying to capture, otherwise get length to be 1 or 2
+		boolean val = isValidLoc(curr,next);
+		boolean path = isPathClear(curr,next);
 		
-		if(isFirstMove(curr) && ((isUp(curr,next) && this.whiteOrBlack == 0) || (isDown(curr,next) && this.whiteOrBlack == 1))) {//can move two spaces
+		if(isFirstMove(curr) && val && path && ((isUp(curr,next) && this.whiteOrBlack == 0) || (isDown(curr,next) && this.whiteOrBlack == 1))) {//can move two spaces
 			int currRow = Board.transRow(curr.charAt(1));
 			int nextRow = Board.transRow(next.charAt(1));
+			
+			if(isOneSpace(curr,next) && isDiag(curr,next) && oppInSpace(curr,next)) { return true; } //first move is a capture
 			
 			if(((nextRow==currRow-2 || nextRow==currRow-1) && this.whiteOrBlack == 0) || ((nextRow==currRow+2 || nextRow==currRow+1) && this.whiteOrBlack == 1)) {
 				return true;
@@ -49,12 +53,11 @@ public class Pawn extends GamePiece{
 			return false;
 		}
 		  
-		if(isValidLoc(curr,next) && isPathClear(curr,next) && isOneSpace(curr,next)) { //now check if going up, or going diagonally to capture
-			System.out.println("Stop 1");
+		if(val && path && isOneSpace(curr,next)) { //now check if going up, or going diagonally to capture
+
 			if(isDiag(curr,next) && oppInSpace(curr,next)) { //valid capture
-				System.out.println("Stop 2");
 				return true;
-			}else if((isUp(curr,next) && this.whiteOrBlack == 0) || (isDown(curr,next) && this.whiteOrBlack == 1)) {return true;} //moving upwards
+			}else if((isUp(curr,next) && this.whiteOrBlack == 0) || (isDown(curr,next) && this.whiteOrBlack == 1)) {return true;} //moving white up or black down
 		}
 		return false;
 	}

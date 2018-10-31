@@ -233,6 +233,7 @@ public class Board{
 		//System.out.println("Destination: " + destLetter + destNumber + " Actual RxC coordinates: " + destRow + destCol);
 		
 		boolean isValidMove;
+		String resultOfUpdate;
 		/*
 		if (isValidMove == true){
 			updateBoard();
@@ -306,7 +307,7 @@ public class Board{
 			isValidMove = (((Rook) currCell).tryMove(tokens[0],tokens[1]) && (((((Rook) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Rook) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
-				updateBoard(b, tokens[0], tokens[1], "Rook", pID);
+				 updateBoard(b, tokens[0], tokens[1], "Rook", pID);
 			}
 			else
 				System.out.println("fail");
@@ -460,24 +461,50 @@ public class Board{
 		//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
 	
 		while(check == false){
+			
 			if(whiteMoved == false){
 				bo.printBoard(bo);
 				input = white.makeMove(wPID, check);
 				
 				
-				bo.getMove(bo, input, wPID);
-				whiteMoved = true;
-				blackMoved = false;
+				if(input.equals("GameOver")){
+					return;
+				}
+				
+				if(input.length() > 5){
+					String delim = "[ ]+";
+					String[] tokens = input.split(delim);
+					
+					if(tokens[2].equals("draw?")){
+						input = black.makeMove(bPID, check);
+						if(input.equals("draw"))
+							return;
+					}
+						
+				}
+				
+				
+				
+						
+				
+			
+		
+					bo.getMove(bo, input, wPID);
+					whiteMoved = true;
+					blackMoved = false;
 				
 			}
 			else if(blackMoved == false){
 				bo.printBoard(bo);
 				input = black.makeMove(bPID, check);
 				
-				bo.getMove(bo, input, bPID);
-				blackMoved = true;
-				whiteMoved = false;
-			
+				if(input.equals("GameOver")){
+					return;
+				}
+					bo.getMove(bo, input, bPID);
+					blackMoved = true;
+					whiteMoved = false;
+				
 			}	
 		
 		}
