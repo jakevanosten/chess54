@@ -14,7 +14,7 @@ public class GamePiece extends CellType{
 		return whiteOrBlack;
 	}
 	
-	public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
+public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
 	
 	/*
 	 * DIFFERENT RULES
@@ -33,7 +33,28 @@ public class GamePiece extends CellType{
 	 */
 	
 	public boolean isOneSpace(String curr, String next) {
+		int currRow = Board.transRow(curr.charAt(1));
+		int currCol = Board.transRow(curr.charAt(0));
+		int nextRow = Board.transRow(next.charAt(1));
+		int nextCol = Board.transRow(next.charAt(0));
 		
+		if (nextCol-currCol==1 && nextRow-currRow==1) { //bottom right
+			return true;
+		}else if (nextCol-currCol==1 && currRow-nextRow==1) { //top right
+			return true;
+		}else if (nextCol-currCol==1 && currRow==nextRow) { //directly right
+			return true;
+		}else if (currCol-nextCol==1 && currRow-nextRow==1) { //top left
+			return true;
+		}else if (nextCol==currCol && currRow-nextRow==1) { //directly up
+			return true;
+		}else if (currCol-nextCol==1 && currRow==nextRow) { //directly left
+			return true;
+		}if (nextCol-currCol==1 && nextRow-currRow==1) { //bottom left
+			return true;
+		}else if (nextCol==currCol && nextRow-currRow==1) { //directly down
+			return true;
+		}
 		
 		return false;
 	}

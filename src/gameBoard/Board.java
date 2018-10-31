@@ -178,6 +178,8 @@ public class Board{
 			}
 			System.out.println();
 		}
+		
+		
 
 	}
 
@@ -195,25 +197,27 @@ public class Board{
 			n = reader.nextLine();
 		}
 		
-		char originLetter = n.charAt(0);
-		char originNumber = n.charAt(1);
 		
-		char destLetter = n.charAt(3);
-		char destNumber = n.charAt(4);
 		
-		/* IF WE WANT TO PARSE BY origin and destination via token array we can 
-		 * (just gonna run into issue separating letter from number so i thought charAt() was easier at the moment)
-		 
 		String delim = "[ ]+";
 		String[] tokens = n.split(delim);
 		
+		/*	print token check
 		for (int i = 0; i < tokens.length; i++)
 		    System.out.println(tokens[i]);
 		*/
 		
-		System.out.println("White Move: " + n);
-		System.out.println("original location letter: " + originLetter + " original location number: " + originNumber);
-		System.out.println("destination: " + destLetter + destNumber);
+		char originLetter = tokens[0].charAt(0);
+		char originNumber = tokens[0].charAt(1);
+		
+		char destLetter = tokens[1].charAt(0);
+		char destNumber = tokens[1].charAt(1);
+		
+		
+		System.out.print("White Move: " + n);
+		//System.out.println("original location letter: " + originLetter + " original location number: " + originNumber);
+		//System.out.println("destination: " + destLetter + destNumber);
+		
 		
 		
 		
@@ -230,6 +234,34 @@ public class Board{
 		
 		
 		
+		//TRY TO COMPARE OBJECT TYPE AND SEE IF VALID MOVE
+		//GONNA PROBABLY SEPARATE INTO A NEW METHOD
+		boolean isValidMove;
+		boolean isOppInSpace;
+		CellType currCell = b.cells[originRow][originCol];
+		
+		if (currCell instanceof BlankSpace)
+			System.out.println("not valid");
+		
+		if(currCell instanceof Pawn){
+			
+			isValidMove = ((Pawn) currCell).tryMove(tokens[0],tokens[1]);
+			isOppInSpace = ((Pawn) currCell).oppInSpace(tokens[0], tokens[1]);
+			
+			if(isValidMove == true && isOppInSpace == false)
+				System.out.println("yerr its valid");
+			
+			else
+				System.out.println("fail");
+			
+		}
+		
+			
+			
+		
+		
+		//isValidMove = isPathClear(tokens[0], tokens[1]);
+		
 		
 		
 		//This checks if this movement results in a CheckMate to end the game
@@ -244,6 +276,21 @@ public class Board{
 		
 	}
 	
+	public Object checkPiece(){
+		
+		
+		
+		
+		
+		return Object;
+		
+	}
+	
+	
+	
+	
+	
+	
 	public static boolean isCheckmate(Board b){
 		
 		//Scan board to see if in CheckMate position
@@ -253,17 +300,33 @@ public class Board{
 		//else, return true!
 	}
 	
+	public void updateBoard(Board b, String curr, String dest){
+		
+		
+		//if(b.cell[])
+		
+		
+		
+		
+	}
 	
 	public static void main(String[] args) {
 		Board bo = new Board();
+
 		bo.setBoard(bo); 
 		bo.printBoard(bo);
 		
 	
 		//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
-			bo.getMove(bo);
+			//bo.getMove(bo);
 		  //bo.updateBoard(bo);
+		while(isCheckmate(bo) == false){
+			bo.getMove(bo);
+			//bo.updateBoard();
+			
+			
 		
+		}
 		
 		
 
