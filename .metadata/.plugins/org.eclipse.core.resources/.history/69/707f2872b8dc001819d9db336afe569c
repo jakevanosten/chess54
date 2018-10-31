@@ -4,7 +4,8 @@ import gameBoard. *;
 
 public class chess {
 
-	
+	private char white = 'w';
+	private char black = 'b';
 	
 	public static void main(String[] args){
 		
@@ -13,7 +14,7 @@ public class chess {
 		bo.setBoard(bo);
 		bo.printBoard(bo);
 	
-		while(bo.isCheckmate(bo) == false){
+		while(isCheckmate(bo) == false){
 			
 		}
 		

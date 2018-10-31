@@ -184,9 +184,9 @@ public class Board{
 	}
 
 	
-	public void getMove(Board b, String input, char pID){
-
-		/*
+	public void getMove(Board b){
+		
+		
 		Scanner reader = new Scanner(System.in);
 		System.out.print("White Move: ");	
 		String n = reader.nextLine();
@@ -196,11 +196,11 @@ public class Board{
 			System.out.print("White Move: ");
 			n = reader.nextLine();
 		}
-		*/
+		
 		
 		
 		String delim = "[ ]+";
-		String[] tokens = input.split(delim);
+		String[] tokens = n.split(delim);
 		
 		/*	print token check
 		for (int i = 0; i < tokens.length; i++)
@@ -214,7 +214,7 @@ public class Board{
 		char destNumber = tokens[1].charAt(1);
 		
 		
-		//System.out.print("White Move: " + input);
+		System.out.print("White Move: " + n);
 		//System.out.println("original location letter: " + originLetter + " original location number: " + originNumber);
 		//System.out.println("destination: " + destLetter + destNumber);
 		
@@ -233,14 +233,13 @@ public class Board{
 		System.out.println("Destination: " + destLetter + destNumber + " Actual RxC coordinates: " + destRow + destCol);
 		
 		boolean isValidMove;
-		/*
 		if (isValidMove == true){
 			updateBoard();
 		}else{
 			System.out.println("Error, not a legal move.");
 
 		}
-		*/
+		
 		//TRY TO COMPARE OBJECT TYPE AND SEE IF VALID MOVE
 		//GONNA PROBABLY SEPARATE INTO A NEW METHOD
 		
@@ -250,17 +249,14 @@ public class Board{
 		if (currCell instanceof BlankSpace)
 			System.out.println("not valid");
 		
-		
-		
 		if(currCell instanceof Pawn){
 			
 			isValidMove = ((Pawn) currCell).tryMove(tokens[0],tokens[1]);
 			isOppInSpace = ((Pawn) currCell).oppInSpace(tokens[0], tokens[1]);
 			
-			if(isValidMove == true && isOppInSpace == false){
+			if(isValidMove == true && isOppInSpace == false)
 				System.out.println("yerr its valid");
-				updateBoard(b, tokens[0], tokens[1], "Pawn", pID);
-			}
+			
 			else
 				System.out.println("fail");
 			
@@ -276,11 +272,26 @@ public class Board{
 		
 		//This checks if this movement results in a CheckMate to end the game
 		//If isCheckmate() is true, then we close the input stream and end the game
-		
-		
+		boolean check = isCheckmate(b);
+		if(check == true)
+			reader.close();
+		else{
+			return;
+		}
 		
 		
 	}
+	
+	public Object checkPiece(){
+		
+		
+		
+		
+		
+		return Object;
+		
+	}
+	
 	
 	
 	
@@ -295,87 +306,32 @@ public class Board{
 		//else, return true!
 	}
 	
-	
-	
-	public void updateBoard(Board b, String curr, String next, String pieceType, char pID){
-		
-		int originRow = transRow(curr.charAt(0));
-		int originCol = transRow(curr.charAt(1));
-		int destRow = transRow(next.charAt(0));
-		int destCol = transCol(next.charAt(0));
-		//clear old cell
-		if((destRow == 2 || destRow == 4) && (destCol % 2 != 0))
-			b.cells[originRow][originCol] = new BlankSpace("##");
-		
-		else if((destRow == 2 || destRow == 4) && (destCol % 2 == 0))
-			b.cells[originRow][originCol] = new BlankSpace("  ");
-		
-		else if((destRow == 3 || destRow == 5) && (destCol % 2 == 0))
-			b.cells[originRow][originCol] = new BlankSpace("##");
-		
-		else if((destRow == 3 || destRow == 5) && (destCol % 2 != 0))
-			b.cells[originRow][originCol] = new BlankSpace("  ");
+	public void updateBoard(Board b, String curr, String dest){
 		
 		
-			
-		//Update new cell 
-		if(pieceType.equals("Pawn") && pID == 'w'){
-			b.cells[destRow][destCol] = null;
-			b.cells[destRow][destCol] = new Pawn("wp", 0);
-		}
-		if(pieceType.equals("Pawn") && pID == 'b'){
-			b.cells[destRow][destCol] = null;
-			b.cells[destRow][destCol] = new Pawn("bp", 1);
-		}
-		
+		//if(b.cell[])
 		
 		
 		
 		
 	}
 	
-	
 	public static void main(String[] args) {
-		
-		String input;
 		Board bo = new Board();
-		boolean check = false;
-		
-		boolean whiteMoved = false;
-		boolean blackMoved = false;
-		
-		player white = new player('w');
-		player black = new player('b');
-		//System.out.println("White ID is: " + white.getPlayerID());
-		
-		char wPID = white.getPlayerID();
-		char bPID = black.getPlayerID();
 
 		bo.setBoard(bo); 
-		//bo.printBoard(bo);
+		bo.printBoard(bo);
 		
 	
 		//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
-		
-		while(check == false){
-			if(whiteMoved == false){
-				bo.printBoard(bo);
-				input = white.makeMove(wPID, check);
-				System.out.println("input string is: " + input);
-				bo.getMove(bo, input, wPID);
-				whiteMoved = true;
-				blackMoved = false;
-				continue;
-			}
-			else if(blackMoved == false){
-				bo.printBoard(bo);
-				input = black.makeMove(bPID, check);
-				bo.getMove(bo, input, bPID);
-				blackMoved = true;
-				whiteMoved = false;
-				continue;
-			}	
+			//bo.getMove(bo);
+		  //bo.updateBoard(bo);
+		while(isCheckmate(bo) == false){
+			bo.getMove(bo);
+			//bo.updateBoard();
 			
+			
+		
 		}
 		
 		

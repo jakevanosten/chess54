@@ -319,14 +319,11 @@ public class Board{
 		
 			
 		//Update new cell 
-		if(pieceType.equals("Pawn") && pID == 'w'){
-			b.cells[destRow][destCol] = null;
-			b.cells[destRow][destCol] = new Pawn("wp", 0);
-		}
-		if(pieceType.equals("Pawn") && pID == 'b'){
-			b.cells[destRow][destCol] = null;
-			b.cells[destRow][destCol] = new Pawn("bp", 1);
-		}
+		if(pieceType.equals("Pawn") && pID == 'w')
+			b.cells[originRow][originCol] = new Pawn("wp", 0);
+		if(pieceType.equals("Pawn") && pID == 'b')
+			b.cells[originRow][originCol] = new Pawn("bp", 1);
+			
 		
 		
 		
@@ -346,7 +343,7 @@ public class Board{
 		
 		player white = new player('w');
 		player black = new player('b');
-		//System.out.println("White ID is: " + white.getPlayerID());
+		System.out.println("White ID is: " + white.getPlayerID());
 		
 		char wPID = white.getPlayerID();
 		char bPID = black.getPlayerID();

@@ -319,14 +319,11 @@ public class Board{
 		
 			
 		//Update new cell 
-		if(pieceType.equals("Pawn") && pID == 'w'){
-			b.cells[destRow][destCol] = null;
+		if(pieceType.equals("Pawn") && pID == 'w')
 			b.cells[destRow][destCol] = new Pawn("wp", 0);
-		}
-		if(pieceType.equals("Pawn") && pID == 'b'){
-			b.cells[destRow][destCol] = null;
+		if(pieceType.equals("Pawn") && pID == 'b')
 			b.cells[destRow][destCol] = new Pawn("bp", 1);
-		}
+			
 		
 		
 		
