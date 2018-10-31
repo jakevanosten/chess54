@@ -202,7 +202,7 @@ public class GamePiece extends CellType{
 		int nextRow = Board.transRow(next.charAt(1));
 		int nextCol = Board.transCol(next.charAt(0));
 		
-		if (nextCol-currCol==nextRow-currRow){
+		if (nextCol-currCol==nextRow-currRow || nextCol-currCol==currRow-nextRow) {
 			return true;
 		}
 		return false;

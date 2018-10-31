@@ -263,7 +263,7 @@ public class Board{
 			
 		} else if(currCell instanceof Bishop){
 			
-			isValidMove = (((Bishop) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			isValidMove = (((Bishop) currCell).tryMove(tokens[0],tokens[1]) && (((((Bishop) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Bishop) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Bishop", pID);
@@ -273,7 +273,7 @@ public class Board{
 			
 		} else if(currCell instanceof King){
 			
-			isValidMove = (((King) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			isValidMove = (((King) currCell).tryMove(tokens[0],tokens[1]) && (((((King) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((King) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "King", pID);
@@ -283,7 +283,7 @@ public class Board{
 			
 		}else if(currCell instanceof Queen){
 			
-			isValidMove = (((Queen) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			isValidMove = (((Queen) currCell).tryMove(tokens[0],tokens[1]) && (((((Queen) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Queen) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Queen", pID);
@@ -293,7 +293,7 @@ public class Board{
 			
 		}else if(currCell instanceof Knight){
 			
-			isValidMove = (((Knight) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			isValidMove = (((Knight) currCell).tryMove(tokens[0],tokens[1]) && (((((Knight) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Knight) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Knight", pID);
@@ -303,7 +303,7 @@ public class Board{
 			
 		}else if(currCell instanceof Rook){
 			
-			isValidMove = (((Rook) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+			isValidMove = (((Rook) currCell).tryMove(tokens[0],tokens[1]) && (((((Rook) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Rook) currCell).whiteOrBlack == 1 ) && pID=='b')));
 			
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Rook", pID);
