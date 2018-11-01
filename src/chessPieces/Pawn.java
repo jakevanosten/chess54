@@ -28,8 +28,8 @@ public class Pawn extends GamePiece{
      * @param curr  String ID for gamepieces current location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on placement of pawn
      * 
@@ -49,8 +49,8 @@ public class Pawn extends GamePiece{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on ending location of pawn
      * 
@@ -76,8 +76,8 @@ public class Pawn extends GamePiece{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on placement of pieces
      * 

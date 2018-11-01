@@ -122,7 +122,7 @@ public class Player {
      * is in check from any players on the opposing team
      * 
      * @param kingRow	int for the row value of the kings location
-     * @param kingRow	int for the col value of the kings location
+     * @param kingCol	int for the col value of the kings location
      * @param p			Player whose king is in question
      * 
      * @return 		true if king is in check from other team's pieces, false otherwise

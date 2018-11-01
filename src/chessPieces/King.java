@@ -28,8 +28,8 @@ public class King extends GamePiece{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on placement of pieces
      * 

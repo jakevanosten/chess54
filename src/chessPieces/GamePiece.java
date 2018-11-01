@@ -31,6 +31,17 @@ public class GamePiece extends CellType{
 	/**
      * returns an integer corresponding to the pieces color when created
      * 
+     * @param curr	current coordinates of piece
+     * @param next	coordinates for destination
+     * 
+     * @return 		false because it will always be called with a cast to a subclass
+     * 
+     */
+	public boolean tryMove(String curr, String next) {return false;}
+	
+	/**
+     * returns an integer corresponding to the pieces color when created
+     * 
      * @return 		0 for white pieces and 1 for black pieces
      * 
      */
@@ -66,8 +77,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on length of move
      * 
@@ -107,8 +118,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on openness of new space
      * 
@@ -139,8 +150,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on openness of path
      * 
@@ -151,11 +162,6 @@ public class GamePiece extends CellType{
 		int nextRow = Board.transRow(next.charAt(1));
 		int nextCol = Board.transCol(next.charAt(0));
 		
-		/*DONE -if only row changes, move along the columns. 
-		 *DONE - if only col changes, move along the row.
-		 * DONE - if row and col changed by same amount, move along diagonal.
-		 * otherwise, must be a knight, return true since they can jump over pieces
-		 */
 		if(currCol == nextCol && currRow != nextRow && currRow < nextRow) { //check each row on path - moving down the board
 			for(int i=currRow+1;i<=nextRow;i++) {
 				if(i==nextRow && Board.cells[i][currCol] instanceof GamePiece && ((GamePiece) Board.cells[i][currCol]).whiteOrBlack != this.whiteOrBlack) { 
@@ -251,8 +257,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on upward trajectory of movement
      * 
@@ -277,8 +283,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on downward trajectory of movement
      * 
@@ -303,8 +309,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on horizontal trajectory of movement
      * 
@@ -329,8 +335,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on diagonal trajectory of movement
      * 
@@ -355,8 +361,8 @@ public class GamePiece extends CellType{
      * @param next  String ID for gamepieces next location
      * 
      * @see Board#Board()
-     * @see #transRow(char)
-     * @see #transCol(char)
+     * @see Board#transRow(char)
+     * @see Board#transCol(char)
      * 
      * @return 		true or false depending on L-shaped trajectory of movement
      * 

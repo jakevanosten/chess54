@@ -33,7 +33,7 @@ public class Board{
      * translates the given input value into corresponding row
      * returns promptly when match occurs
      * 
-     * @param num	 the char row value to be compared to find equivalent to array index
+     * @param num   the char row value to be compared to find equivalent to array index
      * @return 		value that corresponds to the row within 2d array
      * 
      */
@@ -64,7 +64,7 @@ public class Board{
      * translates the given input value into corresponding row number
      * returns promptly when match occurs
      * 
-     * @param num	 the integer row value to be compared to find equivalent to array index
+     * @param num   the integer row value to be compared to find equivalent to array index
      * @return 		String value that corresponds to the row within 2d array legend
      * 
      */
@@ -95,7 +95,7 @@ public class Board{
      * translates the given input value into corresponding column
      * returns promptly when match occurs
      * 
-     * @param num	 the char value to be compared to find equivalent to array index
+     * @param letter	the char value to be compared to find equivalent to array index
      * @return 		value that corresponds to the column within 2d array
      * 
      */
@@ -156,7 +156,7 @@ public class Board{
      * void return nothing as the setting of the board is all done internally
      * returns promptly when match occurs
      * 
-     * @param board	 board in its current start state
+     * @param b	 board in its current start state
      * 
      * @see Rook#Rook(String, int,int,int)
      * @see Knight#Knight(String, int,int,int)
@@ -302,7 +302,7 @@ public class Board{
      * within those coordinates, decides if valid move
      * 
      * @param b	 	the chess board 2d array
-     * @param input the String origin &destination input given by the user
+     * @param input the String origin and destination input given by the user
      * @param pID	the char that distinguishes b/w white and black player
      * 
      * 
@@ -311,7 +311,7 @@ public class Board{
      * @see #updateBoard(Board, String, String, String, char)
      * @see GamePiece#tryMove(String, String)
      * @see Pawn#isFirstMove(String)
-     * @see #enPassant(Board, String, char, String, String)
+     * 
      */
 	public void getMove(Board b, String input, char pID){
 		
@@ -567,7 +567,7 @@ public class Board{
      * 
      * @param b	 	the chess board 2d array
      * 
-     *
+     *@return true if checkmate condition clears, game is over
      */
 	
 	public static boolean isCheckmate(Board b){
