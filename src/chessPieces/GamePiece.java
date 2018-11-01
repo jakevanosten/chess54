@@ -1,20 +1,3 @@
-package chessPieces;
-
-import gameBoard.Board;
-
-/*
- * DIFFERENT RULES
- *  DONE - 2. IsPathClear - checks if all spaces in path to destination are not blocked by other pieces (does not apply to knights)
- *  
- *  DONE 3. IsUp - checks if move is in a straight forward direction (for Pawns, Rooks, Queens, Kings)
- *  DONE 4. IsDown - checks if move is in a backwards direction (for Rooks, Queens, Kings)
- *  DONE 5. IsHoriz - checks if move is to the left or right of current position (for Rooks, Queens, Kings)
- *  DONE 6. IsDiag - checks if move is diagonal from current position (for Bishops, Queens, Kings/pawns when capturing - needs to be opponent there)
- *  DONE 7. IsL - checks if in L from current position (for Knights)
- *  
- *  DONE - in Pawn.java 8. IsFirstMove - checks if they are in the beginning row which would make the two space jump possible (for Pawns)
- */
-
 /**
  * Defines all the rules for each chess piece as their superclass so 
  * they can use varying amounts of them to create their own valid move checks
@@ -26,6 +9,11 @@ import gameBoard.Board;
  * @see #GamePiece
  *          
  */
+
+package chessPieces;
+
+import gameBoard.Board;
+
 public class GamePiece extends CellType{
 	public int whiteOrBlack;
 	public int rowPos, colPos = 0;
@@ -154,7 +142,7 @@ public class GamePiece extends CellType{
      * @see #transRow(char)
      * @see #transCol(char)
      * 
-     * @return 		true or false depending on openness of new space
+     * @return 		true or false depending on openness of path
      * 
      */
 	public boolean isPathClear(String curr, String next) {
@@ -255,6 +243,20 @@ public class GamePiece extends CellType{
 		return true;
 	}
 	
+	/**
+     * return true if the path from curr to next moves up the board
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on upward trajectory of movement
+     * 
+     */
 	public boolean isUp(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));
@@ -267,6 +269,20 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
+	/**
+     * return true if the path from curr to next moves down the board
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on downward trajectory of movement
+     * 
+     */
 	public boolean isDown(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));
@@ -279,6 +295,20 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
+	/**
+     * return true if the path from curr to next moves left or right on the board
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on horizontal trajectory of movement
+     * 
+     */
 	public boolean isHoriz(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));
@@ -291,6 +321,20 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
+	/**
+     * return true if the path from curr to next moves diagonally on the board
+     * upper left/lower left/upper right/ or lower right
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on diagonal trajectory of movement
+     * 
+     */
 	public boolean isDiag(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));
@@ -303,6 +347,20 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
+	/**
+     * return true if the path from curr to next moves in an L-shape
+     * relevant to knights only
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on L-shaped trajectory of movement
+     * 
+     */
 	public boolean isL(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));

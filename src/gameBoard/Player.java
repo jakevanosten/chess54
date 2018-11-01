@@ -1,3 +1,14 @@
+/**
+ * Defines the two player teams of the game (Black and White) and gives IDs
+ * to determine move order
+ * 
+ * @author Jake Van Osten
+ * @author Tiffany Moral
+ * 
+ * @see #Player
+ *          
+ */
+
 package gameBoard;
 
 import java.util.Scanner;
@@ -14,15 +25,32 @@ public class Player {
 	private char playerID;
 
 	
-	
+	/*
+	 * Player Class constructor
+	 */
 	public Player(char playerID){
 		this.playerID = playerID;
 	}
 	
+	/**
+     * returns an integer corresponding to the teams color when created
+     * 
+     * @return 		0 for white team and 1 for black team
+     * 
+     */
 	public char getPlayerID(){
 		return playerID;
 	}
 	
+	/**
+     * reads in user input and checks against commands, then returns input string
+     * 
+     * @param pID	char used to delineate colors of teams
+     * @param isCheckmate	boolean used to determine if the game is over
+     * 
+     * @return 		String of user input (coordinates for piece moving)
+     * 
+     */
 	public String makeMove(char pID, boolean isCheckmate){
 		System.out.println();
 		Scanner reader = new Scanner(System.in);
@@ -89,6 +117,17 @@ public class Player {
 		return input;
 	}
 	
+	/**
+     * checks the location of the players king to show if he 
+     * is in check from any players on the opposing team
+     * 
+     * @param kingRow	int for the row value of the kings location
+     * @param kingRow	int for the col value of the kings location
+     * @param p			Player whose king is in question
+     * 
+     * @return 		true if king is in check from other team's pieces, false otherwise
+     * 
+     */
 	public boolean inCheck(int kingRow, int kingCol, Player p) {
 		//locate king of players color on board - do reverse pathClear for every pieces path type, if piece from other team found on path then check
 		int theirColor;

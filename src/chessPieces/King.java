@@ -1,14 +1,39 @@
+/**
+ *Defines all the rules for Bishop pieces in terms of valid moves
+ *and potential Castling with Rooks
+ * 
+ * @author Jake Van Osten
+ * @author Tiffany Moral
+ * 
+ * @see #King
+ *          
+ */
 package chessPieces;
 
 import gameBoard.Board;
 
 public class King extends GamePiece{
 	public static int castlingFlag = 0;
-	
+	/*
+	 * King class constructor with piece tag, team color, and current row 
+	 * and column values
+	 */
 	public King(String tag, int wob, int r, int c) {
 		super(tag, wob, r, c);
 	}
-	
+	/**
+     * returns true if king is preparing for a valid castling maneuver
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on placement of pieces
+     * 
+     */
 	public boolean isCastling(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));
@@ -39,6 +64,24 @@ public class King extends GamePiece{
 		return false;
 	}
 	
+	/**
+     * return true if the path from curr to next is not blocked by other pieces
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see GamePiece#isValidLoc(String, String)
+     * @see GamePiece#isPathClear(String, String)
+     * @see GamePiece#isDiag(String, String)
+     * @see GamePiece#isOneSpace(String, String)
+     * @see GamePiece#isUp(String, String)
+     * @see GamePiece#isDown(String, String)
+     * @see GamePiece#isHoriz(String, String)
+     * 
+     * @return 		true or false depending on openness of path
+     * 
+     */
 	public boolean tryMove(String curr, String next) {
 		if(isHoriz(curr,next)) {
 			if(isCastling(curr,next)) {
@@ -53,11 +96,4 @@ public class King extends GamePiece{
 		}
 		return false;
 	}
-	/*make method for Try to Move to see if its a legal move*/
-	/*This will be the method that error checks for king specific moves*/
-	/*Also will be able to indicate if a move will result in a simple change in location or a kill */
-	/*Valid move check should be thorough incase movement will result in putting king in check*/
-	
-	
-	/*make method for setting the actual movement if Try to Move is valid*/
 }

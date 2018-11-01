@@ -1,15 +1,39 @@
+/**
+ * Defines all the rules for Pawn pieces in terms of valid moves,
+ * including potential promotions to other pieces
+ * 
+ * @author Jake Van Osten
+ * @author Tiffany Moral
+ * 
+ * @see #Pawn
+ *          
+ */
 package chessPieces;
 
 import gameBoard.Board;
 
 public class Pawn extends GamePiece{
 	public static int promotionFlag = 0;
-	
+	/*
+	 * Pawn class constructor with piece tag, team color, and current row 
+	 * and column values
+	 */
 	public Pawn(String tag, int wob, int r, int c) {
 		super(tag, wob, r, c);
 	}	
 	
-	
+	/**
+     * returns true if pawn is preparing for its first move
+     * 
+     * @param curr  String ID for gamepieces current location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on placement of pawn
+     * 
+     */
 	public boolean isFirstMove(String curr) {
 		
 		if((this.whiteOrBlack == 0 && curr.charAt(1) == '2') || (this.whiteOrBlack == 1 && curr.charAt(1) == '7')){
@@ -18,6 +42,19 @@ public class Pawn extends GamePiece{
 		return false;
 	}
 	
+	/**
+     * returns true if pawn is about to be promoted to a new piece
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on ending location of pawn
+     * 
+     */
 	public boolean isPromoting(String curr, String next) {
 		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
 		
@@ -32,6 +69,19 @@ public class Pawn extends GamePiece{
 		return false;
 	}
 	
+	/**
+     * returns true if pawn has an opponent in the space it wants to move to
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on placement of pieces
+     * 
+     */
 	public boolean oppInSpace(String curr, String next) {
 		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
 		CellType nxtCell = Board.cells[Board.transRow(next.charAt(1))][Board.transCol(next.charAt(0))];
@@ -49,7 +99,23 @@ public class Pawn extends GamePiece{
 		return false;
 	}
 	
-	
+	/**
+     * return true if the path from curr to next is not blocked by other pieces
+     * and checks for promoting and double space move on first move
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see GamePiece#isValidLoc(String, String)
+     * @see GamePiece#isPathClear(String, String)
+     * @see GamePiece#isDiag(String, String)
+     * @see GamePiece#isOneSpace(String, String)
+     * @see GamePiece#isUp(String, String)
+     * @see GamePiece#isDown(String, String)
+     * 
+     * @return 		true or false depending on openness of path
+     * 
+     */
 	public boolean tryMove(String curr, String next) { //This is complicated, need to do diagonal if trying to capture, otherwise get length to be 1 or 2
 		boolean val = isValidLoc(curr,next);
 		boolean path = isPathClear(curr,next);

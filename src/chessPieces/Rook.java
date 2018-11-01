@@ -1,45 +1,43 @@
+/**
+ * Defines all the rules for Rook pieces in terms of valid moves
+ * 
+ * 
+ * @author Jake Van Osten
+ * @author Tiffany Moral
+ * 
+ * @see #Rook
+ *          
+ */
 package chessPieces;
 
 public class Rook extends GamePiece{
-	
+	/*
+	 * Rook class constructor with piece tag, team color, and current row 
+	 * and column values
+	 */
 	public Rook(String tag, int wob, int r, int c) {
 		super(tag, wob, r, c);
 	}
 	
+	/**
+     * return true if the path from curr to next is not blocked by other pieces
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see GamePiece#isValidLoc(String, String)
+     * @see GamePiece#isPathClear(String, String)
+     * @see GamePiece#isUp(String, String)
+     * @see GamePiece#isDown(String, String)
+     * @see GamePiece#isHoriz(String, String)
+     * 
+     * @return 		true or false depending on openness of path
+     * 
+     */
 	public boolean tryMove(String curr, String next) {
 		if(isValidLoc(curr,next) && isPathClear(curr,next) && (isUp(curr,next) || isDown(curr,next) || isHoriz(curr,next))) {return true;}
 		
 		return false;
 	}
-	/*make method for Try to Move to see if its a legal move*/
-	/*This will be the method that error checks for rook specific moves*/
-	/*Also will be able to indicate if a move will result in a simple change in location or a kill */
-	
-	
-	/*make method for setting the actual movement if Try to Move is valid*/
-	
-
-	
-	
-	
-	
-	
-	
-	/* subclass of abstract class gamePiece */	
-	
-	/* Rook Piece: the "castle"
-	 * 
-	 * Rook Movement: rook can move any # of spaces horizontal or vertical
-	 * 
-	 * Note: if an opponent's piece blocks the path, that piece may be captured
-	 * by moving the rook to (but not beyond) the occupied square and
-	 * removing the opponent's piece
-	 * 
-	 * 
-	 * Note: Rooks cannot jump over pieces of either color.
-	 * If one of your other pieces blocks your rook's path,
-	 * your rook must stop before reaching that square
-	 * 
-	 */
-	
 }
