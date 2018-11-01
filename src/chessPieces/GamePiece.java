@@ -143,7 +143,20 @@ public class GamePiece extends CellType{
 		return true;
 	}
 	
-	
+	/**
+     * return true if the path from curr to next is not blocked by other pieces
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on openness of new space
+     * 
+     */
 	public boolean isPathClear(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));

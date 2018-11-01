@@ -323,7 +323,7 @@ public class Board{
 		char originNumber = tokens[0].charAt(1);
 		
 		char destLetter = tokens[1].charAt(0);
-		char destNumber = tokens[1].charAt(1);
+		//char destNumber = tokens[1].charAt(1);
 		String promoType = "Queen";
 		
 		if(tokens.length == 3) { //promotion letter
@@ -340,11 +340,11 @@ public class Board{
 		
 		int originRow = transRow(originNumber);
 		int originCol = transCol(originLetter);
-		int destRow = transRow(destNumber);
-		int destCol = transCol(destLetter);
+		//int destRow = transRow(destNumber);
+		//int destCol = transCol(destLetter);
 		
 		boolean isValidMove;
-		boolean isFirstMovement;
+		//boolean isFirstMovement;
 		
 		
 		
@@ -355,7 +355,7 @@ public class Board{
 		
 		
 		if(currCell instanceof Pawn){
-			 boolean isEPcapturePREV = false;
+			/* boolean isEPcapturePREV = false;
 			 boolean isEPcaptureNEXT = false;
 			 char opPID;
 			
@@ -416,7 +416,7 @@ public class Board{
 					}else{
 						opPID = 'w';
 					}
-					enPassant(b, prevOPPawn, opPID, prevPawnLoc, possEP_Pawn);
+					//enPassant(b, prevOPPawn, opPID, prevPawnLoc, possEP_Pawn);
 				}
 				else if(isEPcaptureNEXT == true){
 					String possEP_Pawn = "nextcol";
@@ -427,17 +427,20 @@ public class Board{
 					}else{
 						opPID = 'w';
 					}
-					enPassant(b, prevOPPawn, opPID, nextPawnLoc, possEP_Pawn);	
+					//enPassant(b, prevOPPawn, opPID, nextPawnLoc, possEP_Pawn);	
 				}
-			}	
-			else{	//if not pawn's first time moving
-				System.out.println("Not pawn's first move; En passant not valid");
-				if(Pawn.promotionFlag==1) { //a promotion occurred, get rid of pawn and update with whatever is in user input
+			}	*/
+				//if not pawn's first time moving
+			isValidMove = (((Pawn) currCell).tryMove(tokens[0],tokens[1]) && (((((Pawn) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Pawn) currCell).whiteOrBlack == 1 ) && pID=='b')));
+				
+			//System.out.println("Not pawn's first move; En passant not valid");
+			if(isValidMove) {
+			if(Pawn.promotionFlag==1) { //a promotion occurred, get rid of pawn and update with whatever is in user input
 					updateBoard(b, tokens[0], tokens[1], promoType, pID);
 				}else {
 					updateBoard(b, tokens[0], tokens[1], "Pawn", pID);
 				}
-			}
+			}else {System.out.println("Pawn Fail"); }
 		} else if(currCell instanceof Bishop){
 			
 			isValidMove = (((Bishop) currCell).tryMove(tokens[0],tokens[1]) && (((((Bishop) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Bishop) currCell).whiteOrBlack == 1 ) && pID=='b')));
@@ -521,7 +524,7 @@ public class Board{
      * @see GamePiece#tryMove(String, String)
      * @see Pawn#isFirstMove(String)
      */
-	public void enPassant(Board b, String prevPawnMove, char pID, String prevPawnLoc, String possEP_Pawn){
+/*	public void enPassant(Board b, String prevPawnMove, char pID, String prevPawnLoc, String possEP_Pawn){
 		
 	
 		System.out.println("previous pawn move coordinates: " + prevPawnMove);
@@ -555,7 +558,7 @@ public class Board{
 		}
 	}
 	
-		
+*/
 		//if every possible move is impossible to escape check, that is a checkmate. 
 		//(check all possible moves for a king (8 kinds) to see if they do not set off the check, if they all do checkmate
 
@@ -698,89 +701,6 @@ public class Board{
 			Board.cells[destRow][destCol] = new King("bK", 1,destRow,destCol);
 		}
 		
-	}
-	
-	
-	public static void main(String[] args) {
-		
-		String input;
-		Board bo = new Board();
-		boolean check = false;
-		
-		boolean whiteMoved = false;
-		boolean blackMoved = false;
-		
-		Player white = new Player('w');
-		Player black = new Player('b');
-		//System.out.println("White ID is: " + white.getPlayerID());
-		
-		char wPID = white.getPlayerID();
-		char bPID = black.getPlayerID();
-
-		bo.setBoard(bo); 
-		//bo.printBoard(bo);
-		
-	
-		//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
-	
-		while(check == false){
-			
-			if(whiteMoved == false){
-				bo.printBoard(bo);
-				input = white.makeMove(wPID, check);
-				
-				
-				if(input.equals("GameOver")){
-					return;
-				}
-				
-				//if(enPassant == true){
-					
-				
-				
-				if(input.length() > 5){
-					String delim = "[ ]+";
-					String[] tokens = input.split(delim);
-					
-					if(tokens[2].equals("draw?")){
-						input = black.makeMove(bPID, check);
-						if(input.equals("GameOver"))
-							return;
-					}
-						
-				}
-				
-					bo.getMove(bo, input, wPID);
-					whiteMoved = true;
-					blackMoved = false;
-				
-			}
-			else if(blackMoved == false){
-				bo.printBoard(bo);
-				input = black.makeMove(bPID, check);
-				
-				if(input.equals("GameOver")){
-					return;
-				}
-				
-				if(input.length() > 5){
-					String delim = "[ ]+";
-					String[] tokens = input.split(delim);
-					
-					if(tokens[2].equals("draw?")){
-						input = white.makeMove(wPID, check);
-						if(input.equals("GameOver"))
-							return;
-					}
-						
-				}
-					bo.getMove(bo, input, bPID);
-					blackMoved = true;
-					whiteMoved = false;
-				
-			}	
-		
-		}
 	}
 
 }
