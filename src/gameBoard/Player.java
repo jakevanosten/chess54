@@ -2,6 +2,13 @@ package gameBoard;
 
 import java.util.Scanner;
 
+import chessPieces.Bishop;
+import chessPieces.GamePiece;
+import chessPieces.Knight;
+import chessPieces.Pawn;
+import chessPieces.Queen;
+import chessPieces.Rook;
+
 public class Player {
 
 	private char playerID;
@@ -80,6 +87,48 @@ public class Player {
 		
 		
 		return input;
+	}
+	
+	public boolean inCheck(int kingRow, int kingCol, Player p) {
+		//locate king of players color on board - do reverse pathClear for every pieces path type, if piece from other team found on path then check
+		int theirColor;
+		if(p.getPlayerID() == 'w') { theirColor=1;}
+		else { theirColor=0;}
+		
+		String king = Board.convRow(kingRow).concat(Board.convCol(kingCol));
+		GamePiece curr;
+		String currLoc;
+		for(int i =0;i<8;i++) {
+			for(int k=0;k<8;k++) {
+				if (Board.cells[i][k] instanceof GamePiece) {
+					if(((GamePiece) Board.cells[i][k]).whiteOrBlack == theirColor) { //opponents piece
+						curr = (GamePiece) Board.cells[i][k];
+						currLoc = Board.convRow(i).concat(Board.convCol(kingCol));
+						if(curr instanceof Bishop){
+							Bishop currB = (Bishop) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Knight){
+							Knight currB = (Knight) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Pawn){
+							Pawn currB = (Pawn) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Queen){
+							Queen currB = (Queen) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+						else if(curr instanceof Rook){
+							Rook currB = (Rook) curr;
+							if(currB.tryMove(currLoc, king)) { return true;}
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 }

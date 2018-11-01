@@ -17,13 +17,10 @@ import chessPieces.*;
 public class Board{
 	int row, col = 9;
 	public static CellType[][] cells;
-	public static String prevPawn;
-	
 	
 	/**
      * Board Class constructor
      */
-	
 	public Board(){
 		this.row = 9;
 		this.col = 9;

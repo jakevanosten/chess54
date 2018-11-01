@@ -1,11 +1,9 @@
 package chessPieces;
 
 import gameBoard.Board;
-import gameBoard.Player;
 
 /*
  * DIFFERENT RULES
- * 	DONE - 1. IsValidLoc - If space that youre trying to move to is blocked by your team (if opponent is there you capture them)
  *  DONE - 2. IsPathClear - checks if all spaces in path to destination are not blocked by other pieces (does not apply to knights)
  *  
  *  DONE 3. IsUp - checks if move is in a straight forward direction (for Pawns, Rooks, Queens, Kings)
@@ -15,14 +13,26 @@ import gameBoard.Player;
  *  DONE 7. IsL - checks if in L from current position (for Knights)
  *  
  *  DONE - in Pawn.java 8. IsFirstMove - checks if they are in the beginning row which would make the two space jump possible (for Pawns)
- *  
- *  9. IsOneSpace - move length restriction for pawns and kings
  */
 
+/**
+ * Defines all the rules for each chess piece as their superclass so 
+ * they can use varying amounts of them to create their own valid move checks
+ * 
+ * 
+ * @author Jake Van Osten
+ * @author Tiffany Moral
+ * 
+ * @see #GamePiece
+ *          
+ */
 public class GamePiece extends CellType{
 	public int whiteOrBlack;
 	public int rowPos, colPos = 0;
 	
+	/*
+	 * GamePiece Class constructor
+	 */
 	public GamePiece(String tag, int whiteOrBlack, int rowPos, int colPos) {
 		super(tag);
 		this.rowPos = rowPos;
@@ -30,21 +40,50 @@ public class GamePiece extends CellType{
 		this.whiteOrBlack = whiteOrBlack;
 	}
 	
+	/**
+     * returns an integer corresponding to the pieces color when created
+     * 
+     * @return 		0 for white pieces and 1 for black pieces
+     * 
+     */
 	public int getColor() {
 		return whiteOrBlack;
 	}
 	
+	/**
+     * returns an integer corresponding to the row of the gamePiece
+     * 
+     * @return 		value between 0 and 7 for row index
+     * 
+     */
 	public int getRow() {
 		return rowPos;
 	}
 	
+	/**
+     * returns an integer corresponding to the column of the gamePiece
+     * 
+     * @return 		value between 0 and 7 for column index
+     * 
+     */
 	public int getCol() {
 		return colPos;
 	}
 	
-	public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
-
-	
+	/**
+     * returns true if trying to move exactly 1 space away
+     * move length restriction for pawns and kings
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on length of move
+     * 
+     */
 	public boolean isOneSpace(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
 		int currCol = Board.transCol(curr.charAt(0));
@@ -72,24 +111,20 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
-/*	
-	public int[][] getLegalPositions() {
-		int[][] coords;
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transCol(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transCol(next.charAt(0));
-		for(int i = 0; i<8;i++) {
-			for(int k = 0; k<8;k++) {
-				
-			}
-		}
-		
-		return null;
-	}
-	*/
-	
-	
+	/**
+     * return true if the spot being moved into is not blocked by the same team
+     * 
+     * 
+     * @param curr  String ID for gamepieces current location
+     * @param next  String ID for gamepieces next location
+     * 
+     * @see Board#Board()
+     * @see #transRow(char)
+     * @see #transCol(char)
+     * 
+     * @return 		true or false depending on openness of new space
+     * 
+     */
 	public boolean isValidLoc(String curr, String next) {
 		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
 		CellType nxtCell = Board.cells[Board.transRow(next.charAt(1))][Board.transCol(next.charAt(0))];
@@ -108,47 +143,6 @@ public class GamePiece extends CellType{
 		return true;
 	}
 	
-	public boolean inCheck(int kingRow, int kingCol, Player p) {
-		//locate king of players color on board - do reverse pathClear for every pieces path type, if piece from other team found on path then check
-		int theirColor;
-		if(p.getPlayerID() == 'w') { theirColor=1;}
-		else { theirColor=0;}
-		
-		String king = Board.convRow(kingRow).concat(Board.convCol(kingCol));
-		GamePiece curr;
-		String currLoc;
-		for(int i =0;i<8;i++) {
-			for(int k=0;k<8;k++) {
-				if (Board.cells[i][k] instanceof GamePiece) {
-					if(((GamePiece) Board.cells[i][k]).whiteOrBlack == theirColor) { //opponents piece
-						curr = (GamePiece) Board.cells[i][k];
-						currLoc = Board.convRow(i).concat(Board.convCol(kingCol));
-						if(curr instanceof Bishop){
-							Bishop currB = (Bishop) curr;
-							if(currB.tryMove(currLoc, king)) { return true;}
-						}
-						else if(curr instanceof Knight){
-							Knight currB = (Knight) curr;
-							if(currB.tryMove(currLoc, king)) { return true;}
-						}
-						else if(curr instanceof Pawn){
-							Pawn currB = (Pawn) curr;
-							if(currB.tryMove(currLoc, king)) { return true;}
-						}
-						else if(curr instanceof Queen){
-							Queen currB = (Queen) curr;
-							if(currB.tryMove(currLoc, king)) { return true;}
-						}
-						else if(curr instanceof Rook){
-							Rook currB = (Rook) curr;
-							if(currB.tryMove(currLoc, king)) { return true;}
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
 	
 	public boolean isPathClear(String curr, String next) {
 		int currRow = Board.transRow(curr.charAt(1));
