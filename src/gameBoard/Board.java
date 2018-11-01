@@ -17,6 +17,7 @@ import chessPieces.*;
 public class Board{
 	int row, col = 9;
 	public static CellType[][] cells;
+	public int moveFailFlag = 0;
 	
 	/**
      * Board Class constructor
@@ -314,7 +315,6 @@ public class Board{
      * 
      */
 	public void getMove(Board b, String input, char pID){
-		
 		String delim = "[ ]+";
 		String[] tokens = input.split(delim);
 		
@@ -350,9 +350,10 @@ public class Board{
 		
 		CellType currCell = Board.cells[originRow][originCol];
 		
-		if (currCell instanceof BlankSpace)
-			System.out.println("not valid");
-		
+		if (currCell instanceof BlankSpace) {
+			moveFailFlag = 1;
+			return;
+		}
 		
 		if(currCell instanceof Pawn){
 			/* boolean isEPcapturePREV = false;
@@ -440,7 +441,7 @@ public class Board{
 				}else {
 					updateBoard(b, tokens[0], tokens[1], "Pawn", pID);
 				}
-			}else {System.out.println("Pawn Fail"); }
+			}else {moveFailFlag=1; System.out.println(); }
 		} else if(currCell instanceof Bishop){
 			
 			isValidMove = (((Bishop) currCell).tryMove(tokens[0],tokens[1]) && (((((Bishop) currCell).whiteOrBlack == 0 ) && pID=='w') || ((((Bishop) currCell).whiteOrBlack == 1 ) && pID=='b')));
@@ -448,8 +449,7 @@ public class Board{
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Bishop", pID);
 			}
-			else
-				System.out.println("fail");
+			else{moveFailFlag=1; System.out.println(); }
 			
 		} else if(currCell instanceof King){
 			
@@ -470,8 +470,8 @@ public class Board{
 				}
 				updateBoard(b, tokens[0], tokens[1], "King", pID);
 			}
-			else
-				System.out.println("fail");
+			else{moveFailFlag=1; System.out.println(); }
+			
 			
 		}else if(currCell instanceof Queen){
 			
@@ -480,8 +480,8 @@ public class Board{
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Queen", pID);
 			}
-			else
-				System.out.println("fail");
+			else{moveFailFlag=1; System.out.println(); }
+				
 			
 		}else if(currCell instanceof Knight){
 			
@@ -490,8 +490,8 @@ public class Board{
 			if(isValidMove){
 				updateBoard(b, tokens[0], tokens[1], "Knight", pID);
 			}
-			else
-				System.out.println("fail");
+			else{moveFailFlag=1; System.out.println(); }
+				
 			
 		}else if(currCell instanceof Rook){
 			
@@ -500,8 +500,7 @@ public class Board{
 			if(isValidMove){
 				 updateBoard(b, tokens[0], tokens[1], "Rook", pID);
 			}
-			else
-				System.out.println("fail");
+			else{moveFailFlag=1; System.out.println(); }
 			
 		}	
 		

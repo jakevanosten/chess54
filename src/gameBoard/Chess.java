@@ -8,10 +8,12 @@
  *          
  */
 package gameBoard;
-
+import gameBoard.Board;
 public class Chess {
-
 	
+	/*
+	 * Main method - uses user input to go through each set of player moves until the game is over
+	 */
 	public static void main(String[] args){
 			String input;
 			Board bo = new Board();
@@ -37,6 +39,8 @@ public class Chess {
 				
 				if(whiteMoved == false){
 					bo.printBoard(bo);
+					
+					
 					input = white.makeMove(wPID, check);
 					
 					
