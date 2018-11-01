@@ -1,0 +1,66 @@
+package gameBoard;
+
+import java.util.Scanner;
+
+public class Player {
+
+	private char playerID;
+
+	
+	
+	public Player(char playerID){
+		this.playerID = playerID;
+	}
+	
+	public char getPlayerID(){
+		return playerID;
+	}
+	
+	public String makeMove(char pID, boolean isCheckmate){
+		
+		Scanner reader = new Scanner(System.in);
+		String input;
+		if(pID == 'w'){
+			System.out.print("White Move: ");	
+			input = reader.nextLine();
+			
+			if(input.equals("resign") || input.equals("Resign")){
+				System.out.println("Black wins");
+				reader.close();
+				return "GameOver";
+			}
+			
+			if(input.equals("draw")){
+				reader.close();
+				return "GameOver";
+			}
+			
+		}else{
+			System.out.print("Black Move: ");
+			input = reader.nextLine();
+			
+			if(input.equals("resign") || input.equals("Resign")){
+				System.out.println("White wins");
+				reader.close();
+				return "GameOver";
+			}
+		}
+		
+		
+		while(!(input.equals("draw")) || (input.charAt(0) < 'a') || (input.charAt(0) > 'h') || (input.charAt(3) < 'a') || (input.charAt(3) > 'h') || (input.charAt(1) < '1') || (input.charAt(1) > '8') || (input.charAt(4) < '1') || (input.charAt(4) > '8')) {
+			System.out.println("Illegal move, try again");
+			System.out.print("White Move: ");
+			input = reader.nextLine();
+		}
+		
+		
+		
+		
+		if(isCheckmate == true)
+			reader.close();
+		
+		
+		return input;
+	}
+	
+}

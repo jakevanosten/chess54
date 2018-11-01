@@ -8,13 +8,10 @@
  *          
  */
 package gameBoard;
-import chessPieces. *;
 
 public class Chess {
 
-	/*
-	 * Main method - uses user input to go through each set of player moves until the game is over
-	 */
+	
 	public static void main(String[] args){
 			String input;
 			Board bo = new Board();
@@ -35,21 +32,13 @@ public class Chess {
 			
 		
 			//NOTE: maybe a game loop until ischeckMate is true so that the game keeps getting moves and updating the board
-			boolean isCheckMate = false;
+		
 			while(check == false){
 				
 				if(whiteMoved == false){
 					bo.printBoard(bo);
 					input = white.makeMove(wPID, check);
 					
-					for(int i =0;i<8;i++) {
-						for(int k=0;k<8;k++) {
-							if(Board.cells[i][k] instanceof King && Board.cells[i][k].getTag().equals("wK")){
-								isCheckMate = white.inCheck(i, k, white);
-							}
-							
-						}
-					}
 					
 					if(input.equals("GameOver")){
 						return;
@@ -63,8 +52,6 @@ public class Chess {
 						
 						if(tokens[2].equals("draw?")){
 							input = black.makeMove(bPID, check);
-							
-							
 							if(input.equals("GameOver"))
 								return;
 						}
@@ -78,16 +65,6 @@ public class Chess {
 				else if(blackMoved == false){
 					bo.printBoard(bo);
 					input = black.makeMove(bPID, check);
-					
-					for(int i =0;i<8;i++) {
-						for(int k=0;k<8;k++) {
-							if(Board.cells[i][k] instanceof King && Board.cells[i][k].getTag().equals("bK")){
-								isCheckMate = black.inCheck(i, k, black);
-							}
-							
-						}
-					}
-					
 					
 					if(input.equals("GameOver")){
 						return;
